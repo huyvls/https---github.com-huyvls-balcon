@@ -6,7 +6,7 @@ use Phalcon\Mvc\Controller;
     public function indexAction()
     {
         // Вывод данных для проверки
-        echo "Welcome to BalconController!";
+    echo "sosal";
     }
 
 }

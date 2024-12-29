@@ -20,6 +20,8 @@ $loader->setNamespaces([
 ]);
 
 $loader->register();
+
+
 if (!class_exists('App\Controllers\BalconController')) {
     die("Класс 'App\Controllers\BalconController' не найден. Проверьте автозагрузку.");
 }
@@ -88,7 +90,7 @@ if (!file_exists($configFilePath)) {
     try {
         $response = $app ->handle ($_SERVER['REQUEST_URI']);
         $response->send();
-        echo $response->getContent();
+         $response->getContent();
 
     
     }
