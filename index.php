@@ -8,13 +8,16 @@ use Phalcon\Config\Config;
 use Phalcon\Mvc\Router;
 
 
+define("BASE_PATH", dirname(__DIR__) );
+define("APP_PATH", BASE_PATH ."/balcon");
 
+echo"". APP_PATH . '/app/controllers/' . "<pre> ";
 
 $loader = new Loader();
 
 $loader->setNamespaces([
-    'App\Controllers' => 'C:/xampp/htdocs/balcon/app/controllers/',
-    'App\Models'      => 'C:/xampp/htdocs/balcon/app/models/',
+    'App\Controllers' =>  APP_PATH .'/app/controllers/',
+    'App\Models'      => APP_PATH .'/app/models/'
 ]);
 
 $loader->register();
