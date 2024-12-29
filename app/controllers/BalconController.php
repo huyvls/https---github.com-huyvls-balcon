@@ -3,7 +3,7 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
  class BalconController extends Controller 
 {
-    public function BalconAction()
+    public function indexAction()
     {
         // Вывод данных для проверки
         echo "Welcome to BalconController!";

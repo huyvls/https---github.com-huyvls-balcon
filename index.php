@@ -11,7 +11,6 @@ use Phalcon\Mvc\Router;
 define("BASE_PATH", dirname(__DIR__) );
 define("APP_PATH", BASE_PATH ."/balcon");
 
-echo"". APP_PATH . '/app/controllers/' . "<pre> ";
 
 $loader = new Loader();
 
@@ -21,7 +20,9 @@ $loader->setNamespaces([
 ]);
 
 $loader->register();
-$loader->isRegistered();
+if (!class_exists('App\Controllers\BalconController')) {
+    die("Класс 'App\Controllers\BalconController' не найден. Проверьте автозагрузку.");
+}
 
 
    // var_dump($loader);  
@@ -49,8 +50,9 @@ if (!file_exists($configFilePath)) {
     $router= new Router();
 
     $router-> add(
-        'balcon/',[
-        'controller' => 'index',
+        '/balcon/',[
+        'namespace'  => 'App\Controllers',
+        'controller' => 'Balcon',
         'action'=> 'index'
         ]
         );
@@ -86,7 +88,7 @@ if (!file_exists($configFilePath)) {
     try {
         $response = $app ->handle ($_SERVER['REQUEST_URI']);
         $response->send();
-        echo $response;
+        echo $response->getContent();
 
     
     }
