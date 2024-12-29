@@ -13,8 +13,8 @@ use Phalcon\Mvc\Router;
 $loader = new Loader();
 
 $loader->setNamespaces([
-    'Controllers' => 'C:/xampp/htdocs/balcon/app/controllers/',
-    'Models'      => 'C:/xampp/htdocs/balcon/app/models/',
+    'App\Controllers' => 'C:/xampp/htdocs/balcon/app/controllers/',
+    'App\Models'      => 'C:/xampp/htdocs/balcon/app/models/',
 ]);
 
 $loader->register();

@@ -1,6 +1,7 @@
 <?php 
 
 namespace App\Models;
+
 use Phalcon\Mvc\Model;
 
 class Users extends Model
@@ -18,5 +19,7 @@ class Users extends Model
 
     public static function getAllUsers():array{
         $db = $this ->getDI()->get("db");
+        $query = "Select * from users";
+        $arr_users =  $db -> query();
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Balcon\Controllers;
+namespace App\Controllers;
 use Phalcon\Mvc\Controller;
  class BalconController extends Controller 
 {
