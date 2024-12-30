@@ -18,7 +18,7 @@ use App\Models\Users;
 }
     public function indexAction(){
         echo "sosal2 ";
-        $id = 1 ;
+        $id = 2 ;
         $user = Users::findFirst($id);
         
         $userarr = $user->toArray();

@@ -5,8 +5,8 @@ $di->setShared('router', function () {
     $router = new Router();
     $router->add(
         '/about',
-        [
-            'controller' => 'index',
+        [   'namespace' => 'App/Controllers',
+            'controller' => 'Balcon',
             'action'     => 'about',
         ]
     );
