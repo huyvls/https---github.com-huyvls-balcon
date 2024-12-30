@@ -16,6 +16,11 @@ class Users extends Model
 
     public $registration_date;
 
+    public function initialize()
+    {
+        $this->setSource("users");
+    }
+
 
     public static function getAllUsers():array{
         $db = $this ->getDI()->get("db");

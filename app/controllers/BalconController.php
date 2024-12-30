@@ -1,19 +1,29 @@
 <?php
 namespace App\Controllers;
 use Phalcon\Mvc\Controller;
+use App\Models\Users;
+
  class BalconController extends Controller 
 {
-    public function indexAction()
+    public function balconAction()
     {
         // Вывод данных для проверки
-    echo "sosal";
+    echo "sosal1";
+    $user = new Users;
+    $user ->user_name = "Sosich_test";
+    $user -> password = "1234555854";
+    if ($user -> save()) {
+        echo " + sohranaet ";
     }
-
 }
-
-class indexController extends Controller
-{
     public function indexAction(){
-        echo "sosal";
+        echo "sosal2 ";
+        $id = 1 ;
+        $user = Users::findFirst($id);
+        
+        $userarr = $user->toArray();
+        print_r($userarr['user_name']); 
+
     }
 }
+

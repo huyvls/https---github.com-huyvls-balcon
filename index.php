@@ -2,7 +2,7 @@
 use Phalcon\Mvc\Application;
 use Phalcon\Autoload\Loader;
 use Phalcon\Di\FactoryDefault;
-use Phalcon\Db\Adapter\Mysql;
+use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Mvc\View;
 use Phalcon\Config\Config;
 use Phalcon\Mvc\Router;
@@ -69,10 +69,10 @@ if (!file_exists($configFilePath)) {
     $di->setShared('db', function () use ($config) {
         return new Mysql(
             [
-                'host'     => $config->database->host,
-                'username' => $config->database->username,
-                'password' => $config->database->password,
-                'dbname'   => $config->database->dbname,
+                'host'     => $config->host,
+                'username' => $config->username,
+                'password' => $config->password,
+                'dbname'   => $config->dbname,
             ]
         );
     });
