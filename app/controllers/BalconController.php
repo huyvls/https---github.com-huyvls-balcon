@@ -7,7 +7,6 @@ use App\Models\Users;
 {
     public function balconAction()
     {
-        // Вывод данных для проверки
     echo "sosal1";
     $user = new Users;
     $user ->user_name = "Sosich_test";

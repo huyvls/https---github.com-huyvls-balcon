@@ -9,7 +9,7 @@ use Phalcon\Mvc\Router;
 
 
 define("BASE_PATH", dirname(__DIR__) );
-define("APP_PATH", BASE_PATH ."/balcon");
+define("APP_PATH", BASE_PATH );
 
 
 $loader = new Loader();
@@ -49,10 +49,13 @@ if (!file_exists($configFilePath)) {
 
 
  $di -> setShared("router", function(){
+
+
     $router= new Router();
 
+
     $router-> add(
-        '/balcon/',[
+        '/',[
         'namespace'  => 'App\Controllers',
         'controller' => 'Balcon',
         'action'=> 'index'
