@@ -51,17 +51,8 @@ if (!file_exists($configFilePath)) {
  $di -> setShared("router", function(){
 
 
-    $router= new Router();
-
-
-    $router-> add(
-        '/',[
-        'namespace'  => 'App\Controllers',
-        'controller' => 'Balcon',
-        'action'=> 'index'
-        ]
-        );
-        return $router;
+   $componentRouter =  include APP_PATH . '/app/components/router.php';
+   return $componentRouter();
 });
 
  $config = init ($configFilePath);
@@ -82,7 +73,7 @@ if (!file_exists($configFilePath)) {
 
     $di->set('view', function () {
         return new View();
-        $view->setView('../app/views/');
+        $view->setViewDir(APP_PATH . '/app/views/');
         return $view;
     });
 

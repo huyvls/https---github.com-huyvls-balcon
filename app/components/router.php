@@ -1,14 +1,17 @@
 <?php
-use Phalcon\Di\FactoryDefault;
+use Phalcon\Mvc\Router;
 
-$di->setShared('router', function () {
+return function (){
     $router = new Router();
-    $router->add(
-        '/about',
-        [   'namespace' => 'App/Controllers',
-            'controller' => 'Balcon',
-            'action'     => 'about',
+
+    //Первая стр
+    $router-> add(
+        '/',[
+        'namespace'  => 'App\Controllers',
+        'controller' => 'Balcon',
+        'action'=> 'index'
         ]
-    );
-    return $router;
-});
+        );
+
+        return $router;
+};
