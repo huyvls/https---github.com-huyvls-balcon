@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
+use Phalcon\Mvc\View;
 
  class BalconController extends Controller 
 {
@@ -16,13 +17,20 @@ use App\Models\Users;
     }
 }
     public function indexAction(){
-        echo "sosal2 ";
-        $id = 2 ;
+        $id = 1 ;
         $user = Users::findFirst($id);
         
-        $userarr = $user->toArray();
-        print_r($userarr['user_name']); 
+        if ($user) {
+        $this-> view->username=$user->user_name;
+        $username = $user->user_name;
+
+        $this->view->setVar('username', $username); // из документации фалькона
 
     }
+     else {
+    $this->view->username = "Гость";
 }
 
+$this->view->pick("balcon/index");
+}
+}

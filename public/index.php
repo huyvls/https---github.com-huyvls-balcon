@@ -72,11 +72,14 @@ if (!file_exists($configFilePath)) {
     });
 
     $di->set('view', function () {
-        return new View();
-        $view->setViewDir(APP_PATH . '/app/views/');
+        $view = new Phalcon\Mvc\View();
+        $view->ViewsDir = APP_PATH . '/app/views/';
         return $view;
     });
 
+    
+
+    file_put_contents("C:/xampp/htdocs/balcon/puti.txt", APP_PATH, FILE_APPEND);
 
 
     $app = new Application($di);
