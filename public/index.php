@@ -6,11 +6,14 @@ use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Mvc\View;
 use Phalcon\Config\Config;
 use Phalcon\Mvc\Router;
+use Phalcon\Mvc\View\Engine\Volt;
 
 
 define("BASE_PATH", dirname(__DIR__) );
 define("APP_PATH", BASE_PATH );
 
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 $loader = new Loader();
 
@@ -71,11 +74,43 @@ if (!file_exists($configFilePath)) {
         );
     });
 
+    $di->setShared(
+        'voltService',
+        function ($view) {
+            $volt = new Volt($view);
+            $volt->setOptions(
+                [
+                    'always'    => true,
+                    'extension' => '.volt',
+                    'separator' => '_',
+                    'stat'      => true,
+                    'path'      => APP_PATH . '/cache/volt/',
+                    'prefix'    => '-prefix-',
+                ]
+            );
+    
+            return $volt;
+        }
+    );
+    
+    
+
     $di->set('view', function () {
-        $view = new Phalcon\Mvc\View();
-        $view->ViewsDir = APP_PATH . '/app/views/';
+        $view = new View();
+        $view->setViewsDir( APP_PATH . '/app/views/');
+    
+        $view->registerEngines(
+            [
+                '.volt' => 'voltService',
+            ]
+        );
+
         return $view;
-    });
+    }
+);
+    
+    
+    
 
     
 

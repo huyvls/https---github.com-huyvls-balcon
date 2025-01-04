@@ -1,36 +1,26 @@
 <?php
 namespace App\Controllers;
+
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
-use Phalcon\Mvc\View;
 
- class BalconController extends Controller 
+class BalconController extends Controller 
 {
-    public function balconAction()
+    public function indexAction()
     {
-    echo "sosal1";
-    $user = new Users;
-    $user ->user_name = "Sosich_test";
-    $user -> password = "1234555854";
-    if ($user -> save()) {
-        echo " + sohranaet ";
-    }
-}
-    public function indexAction(){
-        $id = 1 ;
-        $user = Users::findFirst($id);
+        // Установка переменной для представления
+        $this->view->username = "Гость";
+
+        // Проверяем, корректно ли настроен viewsDir и существует ли файл
+        $viewPath = $this->view->getViewsDir() . 'balcon/index.volt';
+        echo "Checking file at path: " . $viewPath . "<br>";
+        echo "$viewPath". "<br>";
+        if (!file_exists($viewPath)) {
+            throw new \Exception("View file not found: " . $viewPath);
+        }
+
         
-        if ($user) {
-        $this-> view->username=$user->user_name;
-        $username = $user->user_name;
-
-        $this->view->setVar('username', $username); // из документации фалькона
+        $this->view->pick("balcon/index");
 
     }
-     else {
-    $this->view->username = "Гость";
-}
-
-$this->view->pick("balcon/index");
-}
 }
