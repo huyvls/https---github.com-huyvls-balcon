@@ -61,8 +61,11 @@ if (!file_exists($configFilePath)) {
  $config = init ($configFilePath);
 
 
-    
-
+ $di -> setShared('session', function(){
+    $componentSession = include APP_PATH .'/app/components/session.php';
+    $componentSession->start();
+    return $componentSession;
+ });
     $di->setShared('db', function () use ($config) {
         return new Mysql(
             [

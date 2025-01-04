@@ -4,7 +4,7 @@ use Phalcon\Mvc\Router;
 return function (){
     $router = new Router();
 
-    //Первая стр
+    //Главнгая стр
     $router-> add(
         '/',[
         'namespace'  => 'App\Controllers',
