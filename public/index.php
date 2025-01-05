@@ -7,6 +7,9 @@ use Phalcon\Mvc\View;
 use Phalcon\Config\Config;
 use Phalcon\Mvc\Router;
 use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Flash\Direct;
+use Phalcon\Html\Escaper;
+
 
 
 define("BASE_PATH", dirname(__DIR__) );
@@ -112,6 +115,23 @@ $di->set('view', function () {
         );
 
         return $view;
+    }
+);
+
+$di->set(
+    'flash',
+    function () use ($di) {
+
+        $escaper = new Escaper();
+        $session = $di->getShared('session');
+        $flash =  new Direct($escaper,$session);
+           $flash->setCssClasses([
+            'error'   => 'alert alert-danger', // Класс для ошибок
+            'success' => 'alert alert-success', // Класс для успехов
+            'notice'  => 'alert alert-info',   // Класс для информационных сообщений
+            'warning' => 'alert alert-warning' // Класс для предупреждений
+        ]);
+        return $flash;
     }
 );
     

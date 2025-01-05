@@ -78,7 +78,9 @@
             text-align: center;
             padding: 10px 0;
         }
+        
     </style>
+    <link rel="stylesheet" href="/css/alert.css">
 </head>
 <body>
     <header>
@@ -98,12 +100,15 @@
 </div>
     </header>
     <main>
+        <div class="flash-messages">
+            {{ flash.output() }}
+        </div>
         <br>
         <br>
         <br>
         <br>
         <br>
-        <?php echo $this->getContent(); ?>
+        {{ content() }}
         <br>
         <br>
         <br>
