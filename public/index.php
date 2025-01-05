@@ -66,7 +66,10 @@ if (!file_exists($configFilePath)) {
     $componentSession->start();
     return $componentSession;
  });
-    $di->setShared('db', function () use ($config) {
+
+
+
+ $di->setShared('db', function () use ($config) {
         return new Mysql(
             [
                 'host'     => $config->host,
@@ -98,7 +101,7 @@ if (!file_exists($configFilePath)) {
     
     
 
-    $di->set('view', function () {
+$di->set('view', function () {
         $view = new View();
         $view->setViewsDir( APP_PATH . '/app/views/');
     
