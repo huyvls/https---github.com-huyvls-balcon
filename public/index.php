@@ -25,8 +25,8 @@ $loader->setNamespaces([
 $loader->register();
 
 
-if (!class_exists('App\Controllers\BalconController')) {
-    die("Класс 'App\Controllers\BalconController' не найден. Проверьте автозагрузку.");
+if (!class_exists('App\Controllers\AuthController')) {
+    die("Класс 'App\Controllers\AuthController' не найден. Проверьте автозагрузку.");
 }
 
 
@@ -115,10 +115,6 @@ $di->set('view', function () {
     }
 );
     
-    
-    
-
-    
 
     file_put_contents("C:/xampp/htdocs/balcon/puti.txt", APP_PATH, FILE_APPEND);
 
@@ -129,8 +125,6 @@ $di->set('view', function () {
         $response = $app ->handle ($_SERVER['REQUEST_URI']);
         $response->send();
          $response->getContent();
-
-    
     }
     
     catch (\Exception $e) {

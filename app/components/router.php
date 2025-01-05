@@ -8,7 +8,7 @@ return function (){
     $router-> add(
         '/',[
         'namespace'  => 'App\Controllers',
-        'controller' => 'Balcon',
+        'controller' => 'Auth',
         'action'=> 'index'
         ]
         );

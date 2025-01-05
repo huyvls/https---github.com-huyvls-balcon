@@ -4,7 +4,7 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
 
-class BalconController extends Controller 
+class AuthController extends Controller 
 {
     public function indexAction()
     {
@@ -25,6 +25,8 @@ class BalconController extends Controller
         
         
         $this->session->set("user", ["name"=> 'traher', 'id'=> '0111']);
+
+        $this ->view->setVar('auth', '0');
         
     }
         
