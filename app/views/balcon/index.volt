@@ -117,8 +117,11 @@
 
 <script src="/js/index.js"></script>
 <script>
+      const rectangle = document.getElementById('rectangle');
     // Функция для исчезания прямоугольника через 3 секунды
+    if (rectangle) {
     setTimeout(() => {
-      document.getElementById('rectangle').classList.add('fade-out');
-    }, 3000); // 3000 мс (3 секунды) перед исчезанием
+        rectangle.classList.add('fade-out');
+    }, 3000);
+ } // 3000 мс (3 секунды) перед исчезанием
   </script>
