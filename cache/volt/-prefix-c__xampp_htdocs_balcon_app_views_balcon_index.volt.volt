@@ -92,7 +92,7 @@
     <label for="password">Пароль</label>
     <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
     
-    <button type="submit">Войти</button>
+    <button type="button" id = "accept">Войти</button>
     
     <div class="register-link">
         <p>Если у Вас нет аккаунта, вы можете <a href="/register">зарегистрироваться</a></p>

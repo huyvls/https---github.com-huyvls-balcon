@@ -10,17 +10,43 @@ class AuthController extends Controller
 {
     public function indexAction()
     {
-        $this->view ->setVar("need", 0);
+        //$this->view ->setVar("need", 0);
         if ($this->request->isPost()) {
-        $username = trim($this->request->getPost("username", "string"));
-        $password = trim($this->request->getPost("password","string"));
+        $data = $this->request->getJsonRawBody();
+        $username = $data->username ?? null;
+        $password = $data->password ?? null;
 
-        if (empty($username) || empty($password)) {
-            $this->flash->error("Логин и пароль обязательно");
-            return $this->response->redirect("/");
-            $need = 1;
-            $this->view ->setVar("need", $need);
+        $checkauth = Users::findFirst([
+            'conditions' => 'user_name = :username: AND password = :password:',
+            'bind'       => [
+                'username' => $username,
+                'password' => $password,
+            ]
+        ]);
+
+        if ($checkauth) {
+            $this->session->set ('user', [
+                'id'=> $checkauth->id,
+                'username'=> $checkauth->username
+            ]);
+            return  $this->response->setJsonContent([
+                'success' => true,
+                'message' => 'Добро пожаловать,' . $username]);
+
+                
         }
+        else{
+            return $this->response->setJsonContent([
+                'success' => false,
+                'message' => 'Неправильно, ... волки']);
+        }
+        
+        // if (empty($username) || empty($password)) {
+        //     $this->flash->error("Логин и пароль обязательно");
+        //     return $this->response->redirect("/");
+        //     $need = 1;
+        //     $this->view ->setVar("need", $need);
+        // }
         
     }
 
