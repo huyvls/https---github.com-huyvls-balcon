@@ -33,12 +33,19 @@ class AuthController extends Controller
                 'success' => true,
                 'message' => 'Добро пожаловать,' . $username]);
 
+
+            $user = $this->session->get('user');
+            if ($user) {
+                $username = $user['username'];
+                $this ->view->setVar("username", $username);
+            }
                 
         }
         else{
             return $this->response->setJsonContent([
                 'success' => false,
-                'message' => 'Неправильно, ... волки']);
+                'message' => 'Неправильно, попробуй еще раз']);
+                $this ->view->setVar("username", "Гость");
         }
         
         // if (empty($username) || empty($password)) {
@@ -52,25 +59,6 @@ class AuthController extends Controller
 
         $user_id = 2 ;
         $users = Users::findfirst($user_id);
-
-
-        if ($users) {
-        $username = $users->user_name; 
-            $this ->view->setVar("username", $username);
-            $this ->view->setVar("title", "Главная");
-        } 
-        
-        else {
-
-        $username = 'Гость';
-        $this->view->username = $username;
-        
-        
-        $this->session->set("user", ["name"=> 'traher', 'id'=> '0111']);
-
-        $this ->view->setVar('auth', '0');
-        
-    }
         
         $this->view->pick("balcon/index");
         $this->view->setTemplateAfter('main');

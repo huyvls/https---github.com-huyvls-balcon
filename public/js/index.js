@@ -21,8 +21,34 @@ document.getElementById('accept').addEventListener('click', () => {
     .then(response => response.json()) // Обрабатываем ответ сервера
     .then(data => {
         console.log('Ответ сервера:', data);
+        
+        if (data && data.success === false){
+            
+        let rectangle = document.getElementById('rectangle');
+        
+
+        if (!rectangle) {
+           
+            rectangle = document.createElement('div');
+            rectangle.id = 'rectangle';
+            rectangle.className = 'rectangle';
+            rectangle.textContent = data.message;
+            document.body.appendChild(rectangle); 
+        }
+
+        if (rectangle) {
+        setTimeout(() => {
+            rectangle.classList.add('fade-out');
+        }, 3000);
+    }
+
+        rectangle.classList.remove('fade-out');
+        }
+        
     })
     .catch(error => {
         console.error('Ошибка:', error);
     });
 });
+
+

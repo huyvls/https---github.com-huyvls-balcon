@@ -2,16 +2,16 @@
 
 .rectangle {
       position: fixed; 
-      top: 20px;
+      top: 50px;
       right: 20px;
-      width: 200px;
-      height: 100px;
-      background-color: #3498db;
-      color: white;
+      width: 400px;
+      height: 50px;
+      background-color: #eb7c8f;
+      color: rgb(255, 252, 252);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 8px;
       opacity: 1;
       transition: opacity 1s ease-out;
@@ -101,27 +101,17 @@
 </form>
 
 {{ content() }}
-{%if need%}
-<div id="rectangle" class="rectangle">
-    Это исчезающий прямоугольник!
-  </div>
-  {%endif%}
 
 
-{%if !auth%}
+
+
+
+
 <h1 style="text-align: center;">Здарова, {{ username }}.</h1>
 <p style="text-align: center;">Это страница после операций.</p>
 
-{%endif%}
+
 
 
 <script src="/js/index.js"></script>
-<script>
-      const rectangle = document.getElementById('rectangle');
-    // Функция для исчезания прямоугольника через 3 секунды
-    if (rectangle) {
-    setTimeout(() => {
-        rectangle.classList.add('fade-out');
-    }, 3000);
- } // 3000 мс (3 секунды) перед исчезанием
-  </script>
+
