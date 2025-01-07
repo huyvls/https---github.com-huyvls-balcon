@@ -12,7 +12,7 @@
         <img src="/img/icon.png"  alt="Profile Picture">
         <nav style="margin-left: auto; margin-right: 35px;">
             <a href="index">Главная</a>
-            <a href="about">О Вас</a>
+            <a href="profile">О Вас</a>
             <a href="fanat">AntifanatFace</a>
             <a href="eshkere">Эщкере</a>
             <a href="shop">Магазин</a>
