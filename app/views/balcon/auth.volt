@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="/css/auth.css">
 
-
-
+{%if reg %}
+<h1 style="text-align: center;">Зарегистрирован, входи</h1>
+{% endif %}
 <div class = "form-wrapper">
 <form class="auth-form" action="/" method="POST" >
     <h2>Авторизация</h2>

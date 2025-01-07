@@ -1,7 +1,8 @@
 <link rel="stylesheet" href="/css/auth.css">
 
-
-
+<?php if ($reg) { ?>
+<h1 style="text-align: center;">Зарегистрирован, входи</h1>
+<?php } ?>
 <div class = "form-wrapper">
 <form class="auth-form" action="/" method="POST" >
     <h2>Авторизация</h2>

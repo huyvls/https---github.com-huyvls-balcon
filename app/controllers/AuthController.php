@@ -10,6 +10,8 @@ class AuthController extends Controller
 {
     public function indexAction()
     {
+
+        $this ->view->setVar("reg", false);
         //$this->view ->setVar("need", 0);
         if ($this->request->isPost()) {
         $data = $this->request->getJsonRawBody();
@@ -59,9 +61,18 @@ class AuthController extends Controller
         $user_id = 2 ;
         $users = Users::findfirst($user_id);
         
-        $this->view->pick("balcon/auth");
-        $this->view->setTemplateAfter('main');
+        
 
+
+    $registered = $this->session->get('reg');
+    if ($registered) {
+    $check = $registered['Y'];
+    $this ->view->setVar("reg", $check);
+    }
+
+
+    $this->view->pick("balcon/auth");
+    $this->view->setTemplateAfter('main');  
    
     }
 }

@@ -11,7 +11,7 @@ document.getElementById('accept').addEventListener('click', () => {
     console.log('Введённый логин:', namevalue, 'Введенный пароль: ', passvalue); 
 
     
-    fetch('/', {
+    fetch('/register', {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json', 
@@ -49,6 +49,9 @@ document.getElementById('accept').addEventListener('click', () => {
     }
 
         rectangle.classList.remove('fade-out');
+        }
+        else if (data && data.success === true){
+        window.location.href = '/';   
         }
         
     })
