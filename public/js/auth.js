@@ -1,3 +1,4 @@
+
 document.getElementById('accept').addEventListener('click', () => {
     const usernameInput = document.getElementById('username');  
     const passwordInput = document.getElementById('password');
@@ -5,6 +6,9 @@ document.getElementById('accept').addEventListener('click', () => {
     const passvalue = passwordInput.value;
 
     console.log('Введённый логин:', namevalue, 'Введенный пароль: ', passvalue); 
+
+
+
 
     // Отправка данных на сервер через fetch
     fetch('/', {

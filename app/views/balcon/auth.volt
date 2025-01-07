@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/auth.css">
 
 
 
@@ -6,10 +6,10 @@
 <form class="auth-form" action="/" method="POST" >
     <h2>Авторизация</h2>
     <label for="username">Логин</label>
-    <input type="text" id="username" name="username" placeholder="Введите ваш логин" required>
+    <input type="text" id="username" name="username" placeholder="Введите Ваш логин" required>
     
     <label for="password">Пароль</label>
-    <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
+    <input type="password" id="password" name="password" placeholder="Введите Ваш пароль" required>
     
     <button type="button" id = "accept">Войти</button>
     
@@ -19,18 +19,18 @@
 </div>
 </form>
 
-<?= $this->getContent() ?>
+{{ content() }}
 
 
 
 
 
 
-<h1 style="text-align: center;">Приветствую, <?= $username ?>.</h1>
+<h1 style="text-align: center;">Приветствую, {{ username }}.</h1>
 <p style="text-align: center;">Войди чтобы ознакомиться</p>
 
 
 
 
-<script src="/js/index.js"></script>
+<script src="/js/auth.js"></script>
 

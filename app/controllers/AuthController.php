@@ -48,19 +48,14 @@ class AuthController extends Controller
                 $this ->view->setVar("username", "Гость");
         }
         
-        // if (empty($username) || empty($password)) {
-        //     $this->flash->error("Логин и пароль обязательно");
-        //     return $this->response->redirect("/");
-        //     $need = 1;
-        //     $this->view ->setVar("need", $need);
-        // }
-        
     }
+    
+    $this ->view->setVar("username", "путник");
 
         $user_id = 2 ;
         $users = Users::findfirst($user_id);
         
-        $this->view->pick("balcon/index");
+        $this->view->pick("balcon/auth");
         $this->view->setTemplateAfter('main');
 
    

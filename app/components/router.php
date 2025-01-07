@@ -11,7 +11,17 @@ return function (){
         'controller' => 'Auth',
         'action'=> 'index'
         ]
+        
         );
+
+        $router-> add(
+            '/register',[
+            'namespace'  => 'App\Controllers',
+            'controller' => 'Register',
+            'action'=> 'index'
+            ]
+            
+            );
 
         return $router;
 };
