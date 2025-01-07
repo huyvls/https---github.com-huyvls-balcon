@@ -11,7 +11,7 @@
         <label for="password">Пароль</label>
         <input type="password" id="password" name="password" placeholder="Введите Ваш пароль" required>
 
-        <label for="repassword">Пароль</label>
+        <label for="repassword">Повтор пароля</label>
         <input type="password" id="repassword" name="password" placeholder="Повторите Ваш пароль" required>
 
         <label for="email">Email</label>

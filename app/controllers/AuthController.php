@@ -26,26 +26,30 @@ class AuthController extends Controller
 
         if ($checkauth) {
             $this->session->set ('user', [
-                'id'=> $checkauth->id,
-                'username'=> $checkauth->username
+                'id'=> $checkauth->user_id,
+                'username'=> $checkauth->user_name
+                
             ]);
-            return  $this->response->setJsonContent([
-                'success' => true,
-                'message' => 'Добро пожаловать,' . $username]);
-
 
             $user = $this->session->get('user');
             if ($user) {
                 $username = $user['username'];
                 $this ->view->setVar("username", $username);
+
+
+            return  $this->response->setJsonContent([
+                'success' => true,
+                'message' => 'Добро пожаловать,' . $username]);
+
             }
                 
         }
         else{
+            $this ->view->setVar("username", "Гость");
             return $this->response->setJsonContent([
                 'success' => false,
                 'message' => 'Неправильно, попробуй еще раз']);
-                $this ->view->setVar("username", "Гость");
+              
         }
         
     }
