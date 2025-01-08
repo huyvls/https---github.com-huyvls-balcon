@@ -16,7 +16,7 @@ class ProfileController extends Controller{
         $agree = $this->request->getPost('agree', 'bool');
 
         if (!$agree) {
-            $this->flashSession->error('сука?');
+            $this->flashSession->error('проверь еще разок');
         
         }
 
