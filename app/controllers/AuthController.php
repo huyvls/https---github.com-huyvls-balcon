@@ -29,7 +29,8 @@ class AuthController extends Controller
         if ($checkauth) {
             $this->session->set ('user', [
                 'id'=> $checkauth->user_id,
-                'username'=> $checkauth->user_name
+                'username'=> $checkauth->user_name, 
+                'email'=> $checkauth->email
                 
             ]);
 
@@ -70,7 +71,7 @@ class AuthController extends Controller
     $this ->view->setVar("reg", $check);
     }
 
-
+    $this-> view->setVar("title","Авторизация");
     $this->view->pick("balcon/auth");
     $this->view->setTemplateAfter('main');  
    

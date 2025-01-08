@@ -4,11 +4,11 @@
     <h2>Ваши данные</h2>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="{{email}}">
+        <input type="email" id="email" placeholder="<?= $email ?>">
     </div>
     <div class="form-group">
         <label for="username">Логин</label>
-        <input type="text" id="username" placeholder="{{login}}">
+        <input type="text" id="username" placeholder="<?= $login ?>">
     </div>
     <div class="form-group">
         <label for="password">Пароль</label>

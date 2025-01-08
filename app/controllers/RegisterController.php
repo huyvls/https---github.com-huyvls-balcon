@@ -78,7 +78,7 @@ class RegisterController extends Controller
         }
     
 
-
+        $this-> view->setVar("title","Регистрация");
         $this->view->pick("balcon/register");
         $this->view->setTemplateAfter('main');
 
