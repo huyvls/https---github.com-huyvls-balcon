@@ -71,6 +71,8 @@ if (!file_exists($configFilePath)) {
  });
 
 
+ $di->setShared('dispatcher', include  APP_PATH . '/app/components/dispatcher.php');
+
 
  $di->setShared('db', function () use ($config) {
         return new Mysql(
