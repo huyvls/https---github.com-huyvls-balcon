@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
+use App\Models\UserSettings;
 
 
 class RegisterController extends Controller
@@ -22,7 +23,7 @@ class RegisterController extends Controller
                 'username' => $username ]
             ]);
 
-        $checkemail = Users ::findfirst([
+        $checkemail = Users::findfirst([
             'conditions' => 'email = :email:',
             'bind'       => [
                 'email' => $email ]
@@ -67,6 +68,17 @@ class RegisterController extends Controller
                         'Y'=> 1,
                         
                     ]);
+
+                    $user_settings = new UserSettings;
+                    $native_user = Users::findfirst([
+                    'conditions' => 'email = :email:',
+                    'bind'       => [
+                        'email' => $email ]
+                    ]);
+                    $user_idd = $native_user->user_id;
+                    $user_settings->user_id=$user_idd;
+                    $user_settings->save();
+
                     return $this->response->setJsonContent([
                         'success' => true,
                         'message' => 'Ништяк']);

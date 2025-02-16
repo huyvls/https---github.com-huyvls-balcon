@@ -22,12 +22,11 @@ $eventsManager->attach('dispatch:beforeExecuteRoute', function ($event, $dispatc
     $action = $dispatcher->getActionName();
 
     $publicRoutes = [
-        'register::index',
-        'eshkere::index',
-        'auth::index'
+        'Register::index',
+        'Eshkere::index',
+        'Auth::index'
     ];
 
-    
     if (!$user && !in_array("$controller::$action", $publicRoutes)) {
         $dispatcher->forward([
             'controller' => 'auth',
@@ -35,6 +34,7 @@ $eventsManager->attach('dispatch:beforeExecuteRoute', function ($event, $dispatc
         ]);
         return false; 
     }
+
 });
 
 

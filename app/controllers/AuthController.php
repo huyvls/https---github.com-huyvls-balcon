@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
+use App\Models\UserSettings;
 use Phalcon\Http\Request;
 use Phalcon\Http\Response;
 
@@ -34,6 +35,21 @@ class AuthController extends Controller
                 
             ]);
 
+            $usetting = UserSettings::findFirst([
+                'conditions' => 'user_id = :user_id:',
+                'bind'       => [
+                    'user_id' => $checkauth->user_id,
+                ]
+            ]);
+
+            if($usetting){
+            $this->session->set ('user_settings', [
+                'theme'=> $usetting->theme,
+                'text_color'=> $usetting->text_color, 
+            ]);
+           }
+
+           
             $user = $this->session->get('user');
             if ($user) {
                 $username = $user['username'];
