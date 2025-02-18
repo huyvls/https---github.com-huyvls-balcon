@@ -15,10 +15,34 @@
         <input type="password" id="password" placeholder="Введите новый пароль">
     </div>
     <div class="form-group">
-        <input type="checkbox" id="agree">
+        <div class="checkbox-wrapper-10">
+            <input checked="" type="checkbox" id="cb5" class="tgl tgl-flip">
+            <label for="cb5" data-tg-on="Да" data-tg-off="Нет" class="tgl-btn"></label>
+          </div>
+        
         <label for="agree">Я дважды проверил</label>
     </div>
+
+    <label for="theme" class="theme">
+        <span class="theme__toggle-wrap">
+            <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" value="dark">
+            <span class="theme__fill"></span>
+            <span class="theme__icon">
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+                <span class="theme__icon-part"></span>
+            </span>
+        </span>
+    </label>
+    Изменить тему
     <div class="form-group">
         <button type="button">Сохранить</button>
     </div>
 </form>
+
