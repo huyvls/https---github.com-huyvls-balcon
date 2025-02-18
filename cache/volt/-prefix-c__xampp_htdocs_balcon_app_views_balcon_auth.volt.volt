@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/css/auth.css">
 
-{%if reg %}
+<?php if ($reg) { ?>
 <h1 style="text-align: center;">Зарегистрирован, входи</h1>
-{% endif %}
+<?php } ?>
 <div class = "form-wrapper">
 <form class="auth-form" action="/" method="POST" >
     <h2>Авторизация</h2>
@@ -38,14 +38,14 @@
 </div>
 </form>
 
-{{ content() }}
+<?= $this->getContent() ?>
 
 
 
 
 
 
-<h1 style="text-align: center;">Приветствую, {{ username }}.</h1>
+<h1 style="text-align: center;">Приветствую, <?= $username ?>.</h1>
 <p style="text-align: center;">Войди чтобы ознакомиться</p>
 
 
