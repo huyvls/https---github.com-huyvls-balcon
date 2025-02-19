@@ -15,6 +15,10 @@
         <input type="password" id="password" placeholder="Введите новый пароль">
     </div>
     <div class="form-group">
+        <label for="repassword">Повтор пароля</label>
+        <input type="password" id="repassword" name="password" placeholder="Повторите пароль">
+    </div>
+    <div class="form-group">
         <label for="agree">Я дважды проверил</label>
         <div class="checkbox-wrapper-10">
             <input  type="checkbox" id="cb5" class="tgl tgl-flip">
