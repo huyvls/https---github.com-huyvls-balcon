@@ -129,10 +129,10 @@ $di->set(
         $session = $di->getShared('session');
         $flash =  new Direct($escaper,$session);
            $flash->setCssClasses([
-            'error'   => 'alert alert-danger', // Класс для ошибок
-            'success' => 'alert alert-success', // Класс для успехов
-            'notice'  => 'alert alert-info',   // Класс для информационных сообщений
-            'warning' => 'alert alert-warning' // Класс для предупреждений
+            'error'   => 'alert alert-danger', 
+            'success' => 'alert alert-success', 
+            'notice'  => 'alert alert-info',   
+            'warning' => 'alert alert-warning' 
         ]);
         return $flash;
     }

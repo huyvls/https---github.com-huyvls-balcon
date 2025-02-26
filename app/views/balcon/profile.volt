@@ -30,7 +30,7 @@
 
     <label for="theme" class="theme">
         <span class="theme__toggle-wrap">
-            <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" value="dark">
+            <input id="theme" class="theme__toggle" type="checkbox" role="switch" name="theme" value="light">
             <span class="theme__fill"></span>
             <span class="theme__icon">
                 <span class="theme__icon-part"></span>
@@ -46,7 +46,10 @@
         </span>
     </label>
     <div class="form-group">
-        <button type="button">Сохранить</button>
+        <button type="button" id = "save">Сохранить</button>
     </div>
 </form>
 
+
+
+<script src="/js/profile.js"></script>

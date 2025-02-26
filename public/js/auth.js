@@ -1,5 +1,5 @@
 
-document.getElementById('accept').addEventListener('click', () => {
+document.getElementById('accept').addEventListener('click', () => { 
     const usernameInput = document.getElementById('username');  
     const passwordInput = document.getElementById('password');
     const namevalue = usernameInput.value;

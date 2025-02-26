@@ -31,6 +31,15 @@ return function (){
         ]
         
         );
+    //Ajax изменение темы
+    $router-> add(
+        '/profile/swapThemeRequest',[
+        'namespace'  => 'App\Controllers',
+        'controller' => 'Profile',
+        'action'=> 'swapThemeRequest'
+        ]
+            
+        )->via(['GET', 'POST']);
             
 
         return $router;
