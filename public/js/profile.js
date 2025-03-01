@@ -99,8 +99,10 @@ document.getElementById('theme').addEventListener('change', function ()  {
     
     if (themeValue === 'dark') { 
         document.body.classList.add('dark-theme'); 
+        localStorage.setItem('theme', 'dark');
     } else {
         document.body.classList.remove('dark-theme'); 
+        localStorage.removeItem('theme');
     }
     
 });

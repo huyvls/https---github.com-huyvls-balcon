@@ -5,7 +5,7 @@ document.getElementById('accept').addEventListener('click', () => {
     const namevalue = usernameInput.value;
     const passvalue = passwordInput.value;
 
-    console.log('Введённый логин:', namevalue, 'Введенный пароль: ', passvalue); 
+    
 
 
 
