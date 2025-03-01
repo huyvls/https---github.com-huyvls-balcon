@@ -1,1 +1,1 @@
-user|a:3:{s:2:"id";i:1;s:8:"username";s:7:"Vitalik";s:5:"email";s:17:"bb.whitew@mail.ru";}user_settings|a:1:{s:5:"theme";s:5:"light";}reg|a:1:{s:1:"Y";i:1;}
+user|a:3:{s:2:"id";i:1;s:8:"username";s:7:"Vitalik";s:5:"email";s:17:"bb.whitew@mail.ru";}user_settings|a:2:{s:5:"theme";s:4:"dark";s:10:"text_color";s:7:"0, 0, 0";}reg|a:1:{s:1:"Y";i:1;}

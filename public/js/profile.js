@@ -66,8 +66,6 @@ document.getElementById('theme').addEventListener('change', function ()  {
 
     const themeValue = this.checked ? 'dark' : 'light';
 
-    console.log("Отправка запроса с темой:", themeValue);
-
     fetch('/profile/swapThemeRequest', {
         method: 'POST', 
         headers: {'Content-Type': 'application/json', },
@@ -92,4 +90,17 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     })
     .catch(error => console.log('Ошибка загрузки темы:', error));
+});
+
+
+document.getElementById('theme').addEventListener('change', function ()  {
+
+    const themeValue = this.checked ? 'dark' : 'light';
+    
+    if (themeValue === 'dark') { 
+        document.body.classList.add('dark-theme'); 
+    } else {
+        document.body.classList.remove('dark-theme'); 
+    }
+    
 });

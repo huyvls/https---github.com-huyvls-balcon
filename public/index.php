@@ -92,12 +92,12 @@ if (!file_exists($configFilePath)) {
             $volt->setOptions(
                 [
                     'always'    => true,
-                    'compileAlways' => true, // Отключает кэширование, всегда компилирует шаблоны
+                    'compileAlways' => true, 
                     'extension' => '.volt',
                     'separator' => '_',
-                    'stat'      => false,  // Проверка времен7и изменения файлов кэша 
+                    'stat'      => false,  
                     'path'      => APP_PATH . '/cache/volt/',
-                    'prefix'    => '-prefix-',
+                    'prefix'    => 'blin_blinskiy',
                 ]
             );
     

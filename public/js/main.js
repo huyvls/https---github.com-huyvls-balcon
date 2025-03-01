@@ -1,14 +1,8 @@
-document.addEventListener("DOMContentLoaded", function(){
-    
-    fetch('/profile/swapThemeRequest',{
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+const theme = localStorage.getItem('theme');
+
+        if (theme === 'dark') { 
+            document.body.classList.add('dark-theme'); 
+        } else {
+            document.body.classList.remove('dark-theme'); 
         }
-    })
-    .then(response => response.json()) 
-    .then(data => {
-        
-        const theme = document.getElementById('theme'); 
-    })
-});
+

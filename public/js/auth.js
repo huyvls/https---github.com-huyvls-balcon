@@ -10,21 +10,23 @@ document.getElementById('accept').addEventListener('click', () => {
 
 
 
-    // Отправка данных на сервер через fetch
+    
     fetch('/', {
-        method: 'POST', // Используем метод POST
+        method: 'POST', 
         headers: {
-            'Content-Type': 'application/json', // Указываем, что отправляем JSON
+            'Content-Type': 'application/json', 
         },
         body: JSON.stringify({
             username: namevalue,
             password: passvalue
-        }) // Преобразуем объект в JSON
+        }) 
     })
 
-    .then(response => response.json()) // Обрабатываем ответ сервера
+    .then(response => response.json()) 
     .then(data => {
         console.log('Ответ сервера:', data);
+
+        
         
         if (data && data.success === false){
             
@@ -47,7 +49,10 @@ document.getElementById('accept').addEventListener('click', () => {
     }
 
         rectangle.classList.remove('fade-out');
-        }
+    }else{
+        localStorage.setItem('theme', data.theme);
+        console.log('Tema:', data.theme);
+    }
         
     })
     .catch(error => {

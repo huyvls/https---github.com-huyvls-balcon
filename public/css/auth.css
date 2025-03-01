@@ -5,7 +5,7 @@
     right: 20px;
     width: 400px;
     height: 50px;
-    background-color: #eb7c8f;
+    background-color: #ffa1b1;
     color: rgb(255, 252, 252);
     display: flex;
     align-items: center;
@@ -22,11 +22,12 @@
   }
 
   .auth-form {
+    background: rgba(255, 255, 255, 0.2);
       position: absolute;
       top: 30%; 
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #fff;
+      /*background-color: #fff;*/
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

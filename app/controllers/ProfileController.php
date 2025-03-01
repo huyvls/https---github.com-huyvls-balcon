@@ -79,7 +79,7 @@ class ProfileController extends Controller{
                 );
                 } catch (\Exception $e){
                 file_put_contents('C:/zxc/work.txt', $e->getMessage() . PHP_EOL, FILE_APPEND);
-            }
+                }
 
                 return $this->response->setJsonContent(['theme' => $theme]);
 

@@ -57,6 +57,7 @@ class AuthController extends Controller
 
 
             return  $this->response->setJsonContent([
+                'theme' => $usetting->theme,
                 'success' => true,
                 'message' => 'Добро пожаловать,' . $username]);
 
