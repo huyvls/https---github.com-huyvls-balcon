@@ -4,13 +4,40 @@ document.getElementById('save').addEventListener('click', () => {
     const usernameInput = document.getElementById('username');  
     const passwordInput = document.getElementById('password');
     const repasswordInput = document.getElementById('repassword');
+    const wrapperInput = document.getElementById('cb5');
     const emailvalue = emailInput.value;
     const namevalue = usernameInput.value;
     const passvalue = passwordInput.value;
     const repassvalue = repasswordInput.value;
+    
 
+function showErrormessage(message){
+    let rectangle = document.getElementById('rectangle');
 
+    if (!rectangle) {
+        rectangle = document.createElement('div');
+        rectangle.id = 'rectangle';
+        rectangle.className = 'rectangle';
+        rectangle.textContent = message;
+        document.body.appendChild(rectangle);
+    } else {
+        rectangle.textContent = message;
+    }
 
+    rectangle.classList.remove('fade-out');
+
+    setTimeout(() => {
+        rectangle.classList.add('fade-out');
+    }, 3000);
+}
+
+    if (wrapperInput) { 
+    if (wrapperInput.checked) {
+        console.log('вкл!'); 
+    } else {
+        console.log("выкл");
+    }
+    }
 
 
 
@@ -31,28 +58,16 @@ document.getElementById('save').addEventListener('click', () => {
     .then(response => response.json()) 
     .then(data => {
         console.log('Ответ сервера:', data);
+
+        console.log('Тип success:', typeof data.success, 'Значение:', data.success);
+
+        if (data && data.success === false){
+            console.log('Условие сработало!');
+        }
         
         if (data && data.success === false){
             
-        let rectangle = document.getElementById('rectangle');
-        
-
-        if (!rectangle) {
-           
-            rectangle = document.createElement('div');
-            rectangle.id = 'rectangle';
-            rectangle.className = 'rectangle';
-            rectangle.textContent = data.message;
-            document.body.appendChild(rectangle); 
-        }
-
-        if (rectangle) {
-        setTimeout(() => {
-            rectangle.classList.add('fade-out');
-        }, 3000);
-    }
-
-        rectangle.classList.remove('fade-out');
+            showErrormessage(data.message);
         }
         
     })

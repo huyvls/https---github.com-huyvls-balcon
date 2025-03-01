@@ -89,3 +89,27 @@ footer {
     text-align: center;
     padding: 10px 0;
 }
+
+
+.rectangle {
+    position: fixed; 
+    top: 50px;
+    right: 20px;
+    width: 400px;
+    height: 50px;
+    background: rgba(235, 59, 59, 0.7);
+    /*background-color: #ffa1b1;*/
+    color: rgb(255, 252, 252);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 8px;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+  }
+  
+  /* Класс для исчезания */
+  .fade-out {
+    opacity: 0;
+  }

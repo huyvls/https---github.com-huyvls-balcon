@@ -9,6 +9,7 @@ use Phalcon\Mvc\Router;
 use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Flash\Direct;
 use Phalcon\Html\Escaper;
+use App\Components\Session;
 
 
 
@@ -22,7 +23,8 @@ $loader = new Loader();
 
 $loader->setNamespaces([
     'App\Controllers' =>  APP_PATH .'/app/controllers/',
-    'App\Models'      => APP_PATH .'/app/models/'
+    'App\Models'      => APP_PATH .'/app/models/',
+    'App\Components'  => APP_PATH .'/app/components/'
 ]);
 
 $loader->register();
@@ -65,7 +67,7 @@ if (!file_exists($configFilePath)) {
 
 
  $di -> setShared('session', function(){
-    $componentSession = include APP_PATH .'/app/components/session.php';
+    $componentSession = Session::init();
     $componentSession->start();
     return $componentSession;
  });

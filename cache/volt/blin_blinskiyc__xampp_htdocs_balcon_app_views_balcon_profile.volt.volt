@@ -24,8 +24,6 @@
             <input  type="checkbox" id="cb5" class="tgl tgl-flip">
             <label for="cb5" data-tg-on="Да" data-tg-off="Нет" class="tgl-btn"></label>
           </div>
-        
-        
     </div>
 
     <label for="theme" class="theme">
@@ -52,4 +50,4 @@
 
 
 
-<script src="/js/profile.js"></script>
+<script src="/js/profile.js" defer></script>
