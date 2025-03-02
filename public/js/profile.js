@@ -35,7 +35,7 @@ function showErrormessage(message){
     if (wrapperInput.checked) {
         console.log('вкл!'); 
     } else {
-        console.log("выкл");
+        showErrormessage('Проверь еще раз');
     }
     }
 
@@ -57,14 +57,7 @@ function showErrormessage(message){
 
     .then(response => response.json()) 
     .then(data => {
-        console.log('Ответ сервера:', data);
-
-        console.log('Тип success:', typeof data.success, 'Значение:', data.success);
-
-        if (data && data.success === false){
-            console.log('Условие сработало!');
-        }
-        
+        console.log(data);
         if (data && data.success === false){
             
             showErrormessage(data.message);

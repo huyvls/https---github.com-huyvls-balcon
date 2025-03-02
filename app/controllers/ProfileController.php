@@ -15,11 +15,11 @@ class ProfileController extends Controller{
     
 
     if ($this->request->isPost()) {
-        $email = $this->request->getPost('email', 'string');
-        $password = $this->request->getPost('password');
-        $repassword = $this->request->getPost('repassword');
-        $login = $this->request->getPost('username', 'string');
-        $agree = $this->request->getPost('agree', 'bool');
+        $data = $this->request->getJsonRawBody();
+        $username = trim($data->username ?? null);
+        $password = trim($data->password ?? null);
+        $repassword = trim($data->repassword ?? null);
+        $email = trim($data->email ?? null);
 
         if (!$repassword) {
             return $this->response->setJsonContent([
