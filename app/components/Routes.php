@@ -1,7 +1,9 @@
 <?php
+namespace App\Components;
 use Phalcon\Mvc\Router;
 
-return function (){
+class Routes{
+    static function init(): Router    {
     $router = new Router();
 
     //Главнгая стр(авторизации)
@@ -24,7 +26,7 @@ return function (){
         );
     //Стр профиля
     $router-> add(
-        '/profile',[
+        '/profiledit',[
         'namespace'  => 'App\Controllers',
         'controller' => 'Profile',
         'action'=> 'index'
@@ -43,4 +45,5 @@ return function (){
             
 
         return $router;
-};
+}
+}

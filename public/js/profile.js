@@ -31,13 +31,12 @@ function showErrormessage(message){
     }, 3000);
 }
 
-    if (wrapperInput) { 
-    if (wrapperInput.checked) {
-        console.log('вкл!'); 
-    } else {
-        showErrormessage('Проверь еще раз');
+    
+    if (!wrapperInput.checked) {
+        showErrormessage('Проверь еще раз'); 
     }
-    }
+    
+    
 
 
 

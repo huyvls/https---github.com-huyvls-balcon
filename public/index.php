@@ -5,11 +5,11 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql;
 use Phalcon\Mvc\View;
 use Phalcon\Config\Config;
-use Phalcon\Mvc\Router;
 use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Flash\Direct;
 use Phalcon\Html\Escaper;
 use App\Components\Session;
+use App\Components\Routes;
 
 
 
@@ -30,16 +30,7 @@ $loader->setNamespaces([
 $loader->register();
 
 
-if (!class_exists('App\Controllers\AuthController')) {
-    die("Класс 'App\Controllers\AuthController' не найден. Проверьте автозагрузку.");
-}
-
-
-   // var_dump($loader);  
-
-
-    
- static $configFilePath = 'C:/xampp/htdocs/balcon/config/db.php';
+ static $configFilePath = APP_PATH.'/config/db.php';
 
   function init($configFilePath){
 
@@ -57,10 +48,7 @@ if (!file_exists($configFilePath)) {
 
 
  $di -> setShared("router", function(){
-
-
-   $componentRouter =  include APP_PATH . '/app/components/router.php';
-   return $componentRouter();
+    return Routes::init();
 });
 
  $config = init ($configFilePath);
@@ -140,8 +128,6 @@ $di->set(
     }
 );
     
-
-    file_put_contents("C:/xampp/htdocs/balcon/puti.txt", APP_PATH, FILE_APPEND);
 
 
     $app = new Application($di);

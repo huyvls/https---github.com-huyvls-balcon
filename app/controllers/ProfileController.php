@@ -3,7 +3,7 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
 use App\Models\UserSettings;
-use Phalcon\Http\Request;
+
 
 
 
@@ -21,7 +21,7 @@ class ProfileController extends Controller{
         $repassword = trim($data->repassword ?? null);
         $email = trim($data->email ?? null);
 
-        if (!$repassword) {
+        if ($password != $repassword) {
             return $this->response->setJsonContent([
                 'success' => false,
                 'message' => 'Повтори']);
@@ -41,8 +41,6 @@ class ProfileController extends Controller{
 
 
     public function swapThemeRequestAction(){
-
-       
 
 
         if ($this->request->isAjax()) {                             

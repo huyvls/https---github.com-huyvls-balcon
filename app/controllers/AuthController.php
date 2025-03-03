@@ -4,8 +4,7 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
 use App\Models\UserSettings;
-use Phalcon\Http\Request;
-use Phalcon\Http\Response;
+
 
 class AuthController extends Controller 
 {
