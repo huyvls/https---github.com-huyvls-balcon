@@ -10,6 +10,7 @@ use Phalcon\Flash\Direct;
 use Phalcon\Html\Escaper;
 use App\Components\Session;
 use App\Components\Routes;
+use App\Components\Dispatch;
 
 
 
@@ -61,7 +62,9 @@ if (!file_exists($configFilePath)) {
  });
 
 
- $di->setShared('dispatcher', include  APP_PATH . '/app/components/dispatcher.php');
+ $di->setShared('dispatcher', function(){
+    return  Dispatch::init();
+});
 
 
  $di->setShared('db', function () use ($config) {
