@@ -1,16 +1,17 @@
 <link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/form_input_text.css">
 
 <?php if ($reg) { ?>
 <h1 style="text-align: center;">Зарегистрирован, входи</h1>
 <?php } ?>
 <div class = "form-wrapper">
 <form class="auth-form" action="/" method="POST" >
-    <h2>Авторизация</h2>
+    <h2>Гавно💅</h2>
     <div class="brutalist-container">
         <input
           id="username" 
           name="username"
-          placeholder="Не почту"
+          placeholder="Или почту"
           class="brutalist-input smooth-type"
           type="text"
           required
@@ -22,7 +23,7 @@
         <input
           id="password" 
           name="password"
-          placeholder="Вводи, не бойся!"
+          placeholder="Сюда"
           class="brutalist-input smooth-type"
           type="password"
           required

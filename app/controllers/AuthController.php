@@ -16,13 +16,14 @@ class AuthController extends BaseController
         //$this->view ->setVar("need", 0);
         if ($this->request->isPost()) {
         $data = $this->request->getJsonRawBody();
-        $username = $data->username ?? null;
+        $login = $data->username ?? null;
         $password = $data->password ?? null;
 
+
         $checkauth = Users::findFirst([
-            'conditions' => 'user_name = :username: AND password = :password:',
+            'conditions' => 'user_name = :login: OR email = :login: AND password = :password:',
             'bind'       => [
-                'username' => $username,
+                'login' => $login,
                 'password' => $password,
             ]
         ]);
