@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use Phalcon\Mvc\Application;
 use Phalcon\Autoload\Loader;
 use Phalcon\Di\FactoryDefault;
@@ -14,8 +15,8 @@ use App\Components\Dispatch;
 
 
 
-define("BASE_PATH", dirname(__DIR__) );
-define("APP_PATH", BASE_PATH );
+define("BASE_PATH", dirname(__DIR__));
+define("APP_PATH", BASE_PATH);
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -23,87 +24,90 @@ error_reporting(E_ALL);
 $loader = new Loader();
 
 $loader->setNamespaces([
-    'App\Controllers' =>  APP_PATH .'/app/controllers/',
-    'App\Models'      => APP_PATH .'/app/models/',
-    'App\Components'  => APP_PATH .'/app/components/'
+    'App\Controllers' =>  APP_PATH . '/app/controllers/',
+    'App\Models'      => APP_PATH . '/app/models/',
+    'App\Components'  => APP_PATH . '/app/components/'
 ]);
 
 $loader->register();
 
 
- static $configFilePath = APP_PATH.'/config/db.php';
+static $configFilePath = APP_PATH . '/config/db.php';
 
-  function init($configFilePath){
+function init($configFilePath)
+{
 
-if (!file_exists($configFilePath)) {
-    die("Ошибка: файл конфигурации {$configFilePath} не найден.");
-}
+    if (!file_exists($configFilePath)) {
+        die("Ошибка: файл конфигурации {$configFilePath} не найден.");
+    }
 
     $configArray = include $configFilePath;
 
     $config = new Config($configArray);
 
     return $config;
- }
- $di = new FactoryDefault();
+}
+$di = new FactoryDefault();
 
 
- $di -> setShared("router", function(){
+$di->setShared("router", function () {
     return Routes::init();
 });
 
- $config = init ($configFilePath);
+ $config = init($configFilePath);
 
 
- $di -> setShared('session', function(){
+$di->setShared('session', function () {
     $componentSession = Session::init();
     $componentSession->start();
     return $componentSession;
- });
+});
 
 
- $di->setShared('dispatcher', function(){
+$di->setShared('dispatcher', function () {
     return  Dispatch::init();
 });
 
 
- $di->setShared('db', function () use ($config) {
-        return new Mysql(
+$di->setShared('db', function () use ($config) {
+    return new Mysql(
+        [
+            'host'     => $config->host,
+            'username' => $config->username,
+            'password' => $config->password,
+            'dbname'   => $config->dbname,
+        ]
+    );
+});
+
+$di->setShared(
+    'voltService',
+    function ($view) {
+        $volt = new Volt($view);
+        $volt->setOptions(
             [
-                'host'     => $config->host,
-                'username' => $config->username,
-                'password' => $config->password,
-                'dbname'   => $config->dbname,
+                'always'    => true,
+                'compileAlways' => true,
+                'extension' => '.volt',
+                'separator' => '_',
+                'stat'      => false,
+                'path'      => APP_PATH . '/cache/volt/',
+                'prefix'    => 'blin_blinskiy',
             ]
         );
-    });
 
-    $di->setShared(
-        'voltService',
-        function ($view) {
-            $volt = new Volt($view);
-            $volt->setOptions(
-                [
-                    'always'    => true,
-                    'compileAlways' => true, 
-                    'extension' => '.volt',
-                    'separator' => '_',
-                    'stat'      => false,  
-                    'path'      => APP_PATH . '/cache/volt/',
-                    'prefix'    => 'blin_blinskiy',
-                ]
-            );
-    
-            return $volt;
-        }
-    );
-    
-    
+        return $volt;
+    }
+);
 
-$di->set('view', function () {
+
+
+$di->set(
+    'view',
+    function () {
         $view = new View();
-        $view->setViewsDir( APP_PATH . '/app/views/');
-    
+        $view->setViewsDir(APP_PATH . '/app/views/');
+
         $view->registerEngines(
             [
                 '.volt' => 'voltService',
@@ -120,29 +124,25 @@ $di->set(
 
         $escaper = new Escaper();
         $session = $di->getShared('session');
-        $flash =  new Direct($escaper,$session);
-           $flash->setCssClasses([
-            'error'   => 'alert alert-danger', 
-            'success' => 'alert alert-success', 
-            'notice'  => 'alert alert-info',   
-            'warning' => 'alert alert-warning' 
+        $flash =  new Direct($escaper, $session);
+        $flash->setCssClasses([
+            'error'   => 'alert alert-danger',
+            'success' => 'alert alert-success',
+            'notice'  => 'alert alert-info',
+            'warning' => 'alert alert-warning'
         ]);
         return $flash;
     }
 );
-    
 
 
-    $app = new Application($di);
 
-    try {
-        $response = $app ->handle ($_SERVER['REQUEST_URI']);
-        $response->send();
-         $response->getContent();
-    }
-    
-    catch (\Exception $e) {
-       echo 'Exception:', $e ->getMessage();
-    }
+$app = new Application($di);
 
-   
+try {
+    $response = $app->handle($_SERVER['REQUEST_URI']);
+    $response->send();
+    $response->getContent();
+} catch (\Exception $e) {
+    echo 'Exception:', $e->getMessage();
+}

@@ -7,7 +7,8 @@ use App\Models\UserSettings;
 
 
 
-class ProfileController extends Controller{
+class ProfileController extends BaseController
+{
     public function indexAction(){
     $user = $this->session->get("user");
     $email = $user['email'];

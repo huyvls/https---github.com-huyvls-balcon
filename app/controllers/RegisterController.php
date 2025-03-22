@@ -5,7 +5,7 @@ use App\Models\Users;
 use App\Models\UserSettings;
 
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
     public function indexAction(){
 

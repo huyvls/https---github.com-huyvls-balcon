@@ -4,9 +4,10 @@ namespace App\Controllers;
 use Phalcon\Mvc\Controller;
 use App\Models\Users;
 use App\Models\UserSettings;
+use App\Controllers\BaseController;
 
 
-class AuthController extends Controller 
+class AuthController extends BaseController 
 {
     public function indexAction()
     {

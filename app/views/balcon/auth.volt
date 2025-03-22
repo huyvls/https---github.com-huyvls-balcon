@@ -41,15 +41,5 @@
 {{ content() }}
 
 
-
-
-
-
-<h1 style="text-align: center;">Приветствую, {{ username }}.</h1>
-<p style="text-align: center;">Войди чтобы ознакомиться</p>
-
-
-
-
 <script src="/js/auth.js"></script>
 
