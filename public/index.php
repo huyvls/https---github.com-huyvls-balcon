@@ -9,9 +9,10 @@ use Phalcon\Config\Config;
 use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Flash\Direct;
 use Phalcon\Html\Escaper;
-use App\Components\Session;
-use App\Components\Routes;
-use App\Components\Dispatch;
+use App\Services\Session;
+use App\Services\Routes;
+use App\Services\Dispatch;
+use App\Services\UserSettingsService;
 
 
 
@@ -26,7 +27,8 @@ $loader = new Loader();
 $loader->setNamespaces([
     'App\Controllers' =>  APP_PATH . '/app/controllers/',
     'App\Models'      => APP_PATH . '/app/models/',
-    'App\Components'  => APP_PATH . '/app/components/'
+    'App\Components'  => APP_PATH . '/app/components/',
+    'App\Services'    => APP_PATH . '/app/services/'
 ]);
 
 $loader->register();
@@ -66,6 +68,11 @@ $di->setShared('session', function () {
 
 $di->setShared('dispatcher', function () {
     return  Dispatch::init();
+});
+
+
+$di->setShared('UserSettingsService', function () {
+    return  UserSettingsService::init();
 });
 
 

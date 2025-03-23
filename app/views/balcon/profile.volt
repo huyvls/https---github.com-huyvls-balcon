@@ -4,20 +4,20 @@
 <form class="settings-form" method="post">
     <h2>Ваши данные</h2>
     <div class="brutalist-container">
-        <label for="email" class="brutalist-label">Email</label>
         <input type="email" id="email" class="brutalist-input smooth-type" placeholder="{{email}}">
+        <label for="email" class="brutalist-label">Email</label>
     </div>
     <div class="brutalist-container">
-        <label  for="username" class="brutalist-label">Логин</label>
         <input type="text" id="username" class="brutalist-input smooth-type" placeholder="{{login}}">
+        <label  for="username" class="brutalist-label">Логин</label>
     </div>
     <div class="brutalist-container">
-        <label for="password" class="brutalist-label">Пароль</label>
         <input type="password" id="password" class="brutalist-input smooth-type" placeholder="Введите новый пароль">
+        <label for="password" class="brutalist-label">Пароль</label>
     </div>
     <div class="brutalist-container">
-        <label for="repassword" class="brutalist-label">Повтор пароля</label>
         <input type="password" id="repassword" name="password"  class="brutalist-input smooth-type"placeholder="Повторите пароль">
+        <label for="repassword" class="brutalist-label">Повтор пароля</label>
     </div>
     <div class="brutalist-container">
         <label for="agree" class="brutalist-label">Ядважды проверил</label>

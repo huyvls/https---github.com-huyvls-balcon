@@ -1,5 +1,5 @@
 <?php
-namespace App\Components;
+namespace App\Services;
 use Phalcon\Mvc\Router;
 
 class Routes{

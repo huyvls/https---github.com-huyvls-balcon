@@ -1,6 +1,6 @@
 <?php      
 namespace App\Controllers;
-use Phalcon\Mvc\Controller;
+use App\Services\UserSettingsService;
 use App\Models\Users;
 use App\Models\UserSettings;
 
@@ -47,27 +47,27 @@ class ProfileController extends BaseController
         if ($this->request->isAjax()) {                             
             $usetting = $this->session->get('user_settings');
             $theme = $usetting['theme'];                                
-            
 
-        
             return $this->response->setJsonContent(['theme' => $theme]);
-          
         }
 
         if ($this->request->isPost()){
             $rawBody = $this->request->getJsonRawBody();
             $theme = $rawBody->theme ?? null; 
 
-            
-           
             if ($theme){
-                $user = $this->session->get('user');
-                $user_id = $user['id'];
+                file_put_contents('C:/zxc/work.txt', $theme, FILE_APPEND);
+                if($this->UserSettingsService->updateTheme($theme)){
+                    file_put_contents('C:/zxc/work.txt', 'DA', FILE_APPEND);
+                }
+
+                // $user = $this->session->get('user');
+                // $user_id = $user['id'];
                 
 
-                $this->session->set ('user_settings', [
-                    'theme'=> $theme 
-                ]);
+                // $this->session->set ('user_settings', [
+                //     'theme'=> $theme 
+                // ]);
                 try {
                 $this->modelsManager->executeQuery(
                     "UPDATE App\Models\UserSettings SET theme = :theme: WHERE user_id = :user_id:",
@@ -87,4 +87,3 @@ class ProfileController extends BaseController
         }
     }
 }
-

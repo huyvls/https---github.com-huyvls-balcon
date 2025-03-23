@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Services;
 
 use Phalcon\Session\Manager;
 use Phalcon\Session\Adapter\Stream;
