@@ -5,12 +5,6 @@ document.getElementById('accept').addEventListener('click', () => {
     const namevalue = usernameInput.value;
     const passvalue = passwordInput.value;
 
-    
-
-
-
-
-    
     fetch('/', {
         method: 'POST', 
         headers: {

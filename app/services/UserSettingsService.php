@@ -36,13 +36,13 @@ class UserSettingsService
             return false;
         }
 
-        // Обновляем в сессии
+        
         $this->session->set('user_settings', ['theme' => $theme]);
 
         try {
-            // Обновляем в БД
+            
             $this->modelsManager->executeQuery(
-                "UPDATE App\Models\UserSettings SET theme = :theme: WHERE user_id = :user_id:",
+                'UPDATE App\Models\UserSettings SET theme = :theme: WHERE user_id = :user_id:',
                 [
                     "theme"  => $theme,
                     "user_id" => $user_id

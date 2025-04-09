@@ -1,47 +1,32 @@
 <?php      
 namespace App\Controllers;
-use App\Services\UserSettingsService;
-use App\Models\Users;
-use App\Models\UserSettings;
+use App\Components\Profile\ProfileRequestDto,
+App\Components\Profile\ProfileValidator,
+App\Components\Profile\ProfileEditor;
 
 
 
 
 class ProfileController extends BaseController
 {
-    public function indexAction(){
+    public function indexAction()  {
     $user = $this->session->get("user");
     $email = $user['email'];
     $login = $user['username'];
     
 
-    if ($this->request->isPost()) {
-        $data = $this->request->getJsonRawBody();
-        $username = trim($data->username ?? null);
-        $password = trim($data->password ?? null);
-        $repassword = trim($data->repassword ?? null);
-        $email = trim($data->email ?? null);
 
-        if ($password != $repassword) {
-            return $this->response->setJsonContent([
-                'success' => false,
-                'message' => 'Повтори']);
-
-        }
-
-    }
-
-
-
-    $this-> view->setVar ("email", $email);
-    $this-> view->setVar ("login", $login);
+    $this-> view->setVars ([
+        'email' => $email,
+        'login' => $login,
+        'title' => 'Настройки'
+    ]);
     $this->view->pick("balcon/profile");
-    $this-> view->setVar("title","Настройки");
     $this->view->setTemplateAfter('main');
 }
 
 
-    public function swapThemeRequestAction(){
+    public function swapThemeRequestAction(): mixed{
 
 
         if ($this->request->isAjax()) {                             
@@ -56,18 +41,9 @@ class ProfileController extends BaseController
             $theme = $rawBody->theme ?? null; 
 
             if ($theme){
-                file_put_contents('C:/zxc/work.txt', $theme, FILE_APPEND);
                 if($this->UserSettingsService->updateTheme($theme)){
-                    file_put_contents('C:/zxc/work.txt', 'DA', FILE_APPEND);
                 }
 
-                // $user = $this->session->get('user');
-                // $user_id = $user['id'];
-                
-
-                // $this->session->set ('user_settings', [
-                //     'theme'=> $theme 
-                // ]);
                 try {
                 $this->modelsManager->executeQuery(
                     "UPDATE App\Models\UserSettings SET theme = :theme: WHERE user_id = :user_id:",
@@ -85,5 +61,24 @@ class ProfileController extends BaseController
 
             }
         }
+    }
+
+
+    public function editRequestAction(){
+
+        if ($this->request->isPost()) {
+            $data = $this->request->getJsonRawBody();
+            $dto = ProfileRequestDto::fromJson($data);
+            //todo Добравть ProfileEditor в DI
+            $result = $this->ProfileEditor->edit($dto);
+
+            return $this->response->setJsonContent($result)
+            ->setStatusCode($result['success'] ? 200 : 400);
+
+    
+            
+    
+        }
+    
     }
 }

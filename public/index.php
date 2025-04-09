@@ -1,11 +1,11 @@
 <?php
 
-use Phalcon\Mvc\Application;
-use Phalcon\Autoload\Loader;
-use Phalcon\Di\FactoryDefault;
-use Phalcon\Db\Adapter\Pdo\Mysql;
-use Phalcon\Mvc\View;
-use Phalcon\Config\Config;
+use Phalcon\Mvc\Application, 
+Phalcon\Autoload\Loader,
+Phalcon\Di\FactoryDefault,
+Phalcon\Db\Adapter\Pdo\Mysql,
+Phalcon\Mvc\View,
+Phalcon\Config\Config;
 use Phalcon\Mvc\View\Engine\Volt;
 use Phalcon\Flash\Direct;
 use Phalcon\Html\Escaper;
@@ -111,7 +111,7 @@ $di->setShared(
 
 $di->set(
     'view',
-    function () {
+    function ()    {
         $view = new View();
         $view->setViewsDir(APP_PATH . '/app/views/');
 
