@@ -9,13 +9,22 @@ class ProfileEditor{
         private ProfileValidator $validator
     ){}
 
-    public function edit(ProfileRequestDto $dto):array{
+
+    public function edit(ProfileRequestDto $dto, $user_id): array{
         if ($errors = $this->validator->validate($dto)){
             return ['success' => false, 'messages' => $errors];
         }
         else{
-            //todo  Реализовать запись в модельку
-        }
+            
+            $user = Users::findByUserId($user_id);
+            if($dto->email){
+            $user->email = $dto->email;  
+            if ($user->save()){
+            return ['success' => true, 'messages' => 'email изменен'];
+            }
+            }
+            //todo доделать тоже самое для других полей
 
+        }
     }
 }

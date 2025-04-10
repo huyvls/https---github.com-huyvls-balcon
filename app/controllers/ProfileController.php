@@ -64,13 +64,13 @@ class ProfileController extends BaseController
     }
 
 
-    public function editRequestAction(){
+    public function editRequestAction(): mixed{
 
         if ($this->request->isPost()) {
             $data = $this->request->getJsonRawBody();
             $dto = ProfileRequestDto::fromJson($data);
             //todo Добравть ProfileEditor в DI
-            $result = $this->ProfileEditor->edit($dto);
+            $result = $this->ProfileEditor->edit($dto, $user['id']);
 
             return $this->response->setJsonContent($result)
             ->setStatusCode($result['success'] ? 200 : 400);

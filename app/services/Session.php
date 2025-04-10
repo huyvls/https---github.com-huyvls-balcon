@@ -7,7 +7,7 @@ use Phalcon\Session\Adapter\Stream;
 
 class Session
 {
-    public static function init()
+    public static function init(): Manager
     {
         if (!is_dir(__DIR__ . '/../../sessions/')) {
             mkdir(__DIR__ . '/../../sessions/', 0755, true);
