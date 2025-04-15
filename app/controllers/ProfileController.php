@@ -57,7 +57,7 @@ class ProfileController extends BaseController
     }
 
 
-    public function editRequestAction(): mixed{
+    public function editRequestAction(): ResponseInterface{
         
         if ($this->request->isPost()) {
         
