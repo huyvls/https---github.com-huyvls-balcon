@@ -3,7 +3,7 @@ namespace App\Controllers;
 use App\Components\Profile\ProfileRequestDto,
 App\Components\Profile\ProfileValidator,
 App\Components\Profile\ProfileEditor;
-
+use Phalcon\Http\ResponseInterface;
 
 
 
@@ -15,11 +15,10 @@ class ProfileController extends BaseController
     {
     $this->user = $this->session->get("user") ?? [];
     }
-    public function indexAction()  {
+    public function indexAction(): void  {
     $email = $this->user['email'];
     $login = $this->user['username'];
     
-
 
     $this-> view->setVars ([
         'email' => $email,
@@ -31,39 +30,28 @@ class ProfileController extends BaseController
 }
 
 
-    public function swapThemeRequestAction(): mixed{
-
+    public function getThemeRequestAction(): ResponseInterface{
 
         if ($this->request->isAjax()) {                             
             $usetting = $this->session->get('user_settings');
             $theme = $usetting['theme'];                                
-
+            file_put_contents('C:/zxc/workk.txt', 'ajax отрабатывает'."\n" . $theme, FILE_APPEND);
             return $this->response->setJsonContent(['theme' => $theme]);
         }
+        return $this->response
+            ->setStatusCode(400, 'Bad Request')
+            ->setJsonContent(['error' => true, 'message' => 'Invalid request']);
+    }
 
+    public function swapThemeRequestAction(): ResponseInterface{
         if ($this->request->isPost()){
             $rawBody = $this->request->getJsonRawBody();
             $theme = $rawBody->theme ?? null; 
 
             if ($theme){
-                if($this->UserSettingsService->updateTheme($theme)){
-                }
-
-                try {
-                $this->modelsManager->executeQuery(
-                    "UPDATE App\Models\UserSettings SET theme = :theme: WHERE user_id = :user_id:",
-                    [
-                        "theme"  => $theme,
-                        "user_id" => $user_id
-                    ]
-                );
-                } catch (\Exception $e){
-                file_put_contents('C:/zxc/work.txt', 'user_service_settings_controller' . $e->getMessage() . PHP_EOL, FILE_APPEND);
-                }
-
+                $this->UserSettingsService->updateTheme($theme);
+                
                 return $this->response->setJsonContent(['theme' => $theme]);
-
-
             }
         }
     }

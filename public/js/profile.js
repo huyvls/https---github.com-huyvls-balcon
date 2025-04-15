@@ -85,7 +85,7 @@ document.getElementById('theme').addEventListener('change', function ()  {
 
 document.addEventListener("DOMContentLoaded", function(){
     
-    fetch('/profile/swapThemeRequest',{
+    fetch('/profile/getThemeRequest',{
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function(){
     })
     .then(response => response.json()) 
     .then(data => {
-        
+        console.log('Текущая тема:', data);
         const themeSwitch = document.getElementById('theme'); 
         if (themeSwitch && data.theme) {
             themeSwitch.checked = (data.theme === 'dark');

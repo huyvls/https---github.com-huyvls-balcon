@@ -13,7 +13,6 @@ class Routes{
         'controller' => 'Auth',
         'action'=> 'index'
         ]
-        
         );
     //Стр регистрации
     $router-> add(
@@ -22,7 +21,6 @@ class Routes{
         'controller' => 'Register',
         'action'=> 'index'
         ]
-        
         );
     //Стр профиля
     $router-> add(
@@ -31,7 +29,6 @@ class Routes{
         'controller' => 'Profile',
         'action'=> 'index'
         ]
-        
         );
     //Изменение темы
     $router-> add(
@@ -39,17 +36,23 @@ class Routes{
         'namespace'  => 'App\Controllers',
         'controller' => 'Profile',
         'action'=> 'swapThemeRequest'
-        ]
-            
+        ]  
         )->via(['GET', 'POST']);
-    //Изменение данных
+    //Получение темы
+    $router-> add(
+        '/profile/getThemeRequest',[
+        'namespace'  => 'App\Controllers',
+        'controller' => 'Profile',
+        'action'=> 'getThemeRequest'
+        ]  
+        )->via(['GET', 'POST']);
+    //Изменение данных профиля
     $router-> add(
         '/editRequest',[
         'namespace'  => 'App\Controllers',
         'controller' => 'Profile',
         'action'=> 'editRequest'
-        ]
-            
+        ]  
         )->via(['GET', 'POST']);
             
 
