@@ -6,9 +6,10 @@ class ProfileValidator{
 public function validate(ProfileRequestDto $dto):array{
 
     $errors = [];
+    $reusername = null;
     if($dto->username){
-    $reusername = Users::findfirst([
-        'conditions' => 'username = :username:',
+    $reusername = Users::findFirst([
+        'conditions' => 'user_name = :username:',
         'bind' => [
             'username' => $dto->username
         ]

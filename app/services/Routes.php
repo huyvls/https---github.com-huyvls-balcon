@@ -33,12 +33,21 @@ class Routes{
         ]
         
         );
-    //Ajax изменение темы
+    //Изменение темы
     $router-> add(
         '/profile/swapThemeRequest',[
         'namespace'  => 'App\Controllers',
         'controller' => 'Profile',
         'action'=> 'swapThemeRequest'
+        ]
+            
+        )->via(['GET', 'POST']);
+    //Изменение данных
+    $router-> add(
+        '/editRequest',[
+        'namespace'  => 'App\Controllers',
+        'controller' => 'Profile',
+        'action'=> 'editRequest'
         ]
             
         )->via(['GET', 'POST']);

@@ -38,10 +38,10 @@ function showErrormessage(message){
     
     
 
-
+    console.log('clicked');
 
     
-    fetch('/profile', {
+    fetch('/editRequest', {
         method: 'POST', 
         headers: {
             'Content-Type': 'application/json', 
@@ -56,8 +56,11 @@ function showErrormessage(message){
 
     .then(response => response.json()) 
     .then(data => {
-        console.log(data);
         if (data && data.success === false){
+            
+            showErrormessage(data.message);
+        }
+        if (data && data.success === true){
             
             showErrormessage(data.message);
         }

@@ -28,7 +28,7 @@ class Users extends Model
         $arr_users =  $db -> query();
     }
 
-    public static function findByUserId($user_id):Users{
+    public static function findByUserId($user_id): ?Users{
         $user = Users::findFirst([
             'conditions' => 'user_id = :user_id:',
             'bind' =>['user_id' => $user_id]

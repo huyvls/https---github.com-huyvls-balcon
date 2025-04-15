@@ -20,7 +20,7 @@
         <label for="repassword" class="brutalist-label">Повтор пароля</label>
     </div>
     <div class="brutalist-container">
-        <label for="agree" class="brutalist-label">Ядважды проверил</label>
+        <label for="agree" class="brutalist-label">Я дважды проверил</label>
         <div class="checkbox-wrapper-10">
             <input  type="checkbox" id="cb5" class="tgl tgl-flip">
             <label for="cb5" data-tg-on="Да" data-tg-off="Нет" class="tgl-btn"></label>

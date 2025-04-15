@@ -9,10 +9,15 @@ App\Components\Profile\ProfileEditor;
 
 class ProfileController extends BaseController
 {
+    public array $user = [];
+
+    public function onConstruct()
+    {
+    $this->user = $this->session->get("user") ?? [];
+    }
     public function indexAction()  {
-    $user = $this->session->get("user");
-    $email = $user['email'];
-    $login = $user['username'];
+    $email = $this->user['email'];
+    $login = $this->user['username'];
     
 
 
@@ -53,7 +58,7 @@ class ProfileController extends BaseController
                     ]
                 );
                 } catch (\Exception $e){
-                file_put_contents('C:/zxc/work.txt', $e->getMessage() . PHP_EOL, FILE_APPEND);
+                file_put_contents('C:/zxc/work.txt', 'user_service_settings_controller' . $e->getMessage() . PHP_EOL, FILE_APPEND);
                 }
 
                 return $this->response->setJsonContent(['theme' => $theme]);
@@ -65,19 +70,19 @@ class ProfileController extends BaseController
 
 
     public function editRequestAction(): mixed{
-
+        
         if ($this->request->isPost()) {
-            $data = $this->request->getJsonRawBody();
-            $dto = ProfileRequestDto::fromJson($data);
-            //todo Добравть ProfileEditor в DI
-            $result = $this->ProfileEditor->edit($dto, $user['id']);
+        
+        $data =  $this->request->getJsonRawBody();
+        
+        $dto = ProfileRequestDto::fromJson($data); 
+           
+        $ProfileEditor = $this->di->get('ProfileEditor');
+                
+        $result = $ProfileEditor->edit($dto, $this->user['id']);
+        
+        return $this->response->setJsonContent($result);
 
-            return $this->response->setJsonContent($result)
-            ->setStatusCode($result['success'] ? 200 : 400);
-
-    
-            
-    
         }
     
     }

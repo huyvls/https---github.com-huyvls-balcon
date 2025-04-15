@@ -22,7 +22,7 @@ class AuthController extends BaseController
 
         $checkauth = Users::findFirst([
             'conditions' => 'user_name = :login: OR email = :login: AND password = :password:',
-            'bind'       => [
+            'bind' => [
                 'login' => $login,
                 'password' => $password,
             ]

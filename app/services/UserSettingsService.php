@@ -50,7 +50,7 @@ class UserSettingsService
             );
             return true;
         } catch (\Exception $e) {
-            file_put_contents('C:/zxc/work.txt', $e->getMessage() . PHP_EOL, FILE_APPEND);
+            file_put_contents('C:/zxc/work.txt', 'user_service_settings' . $e->getMessage() . PHP_EOL, FILE_APPEND);
             return false;
         }
     }
