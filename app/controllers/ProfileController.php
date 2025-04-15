@@ -35,7 +35,6 @@ class ProfileController extends BaseController
         if ($this->request->isAjax()) {                             
             $usetting = $this->session->get('user_settings');
             $theme = $usetting['theme'];                                
-            file_put_contents('C:/zxc/workk.txt', 'ajax отрабатывает'."\n" . $theme, FILE_APPEND);
             return $this->response->setJsonContent(['theme' => $theme]);
         }
         return $this->response
