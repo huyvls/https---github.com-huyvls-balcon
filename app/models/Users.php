@@ -16,17 +16,12 @@ class Users extends Model
 
     public $registration_date;
 
-    public function initialize()
+    private function initialize()
     {
         $this->setSource("users");
     }
 
 
-    public static function getAllUsers():array{
-        $db = $this ->getDI()->get("db");
-        $query = "Select * from users";
-        $arr_users =  $db -> query();
-    }
 
     public static function findByUserId($user_id): ?Users{
         $user = Users::findFirst([

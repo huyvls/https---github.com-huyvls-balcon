@@ -9,23 +9,24 @@
     </div>
     <div class="brutalist-container">
         <input type="text" id="username" class="brutalist-input smooth-type" placeholder="{{login}}">
-        <label  for="username" class="brutalist-label">Логин</label>
+        <label for="username" class="brutalist-label">Логин</label>
     </div>
     <div class="brutalist-container">
         <input type="password" id="password" class="brutalist-input smooth-type" placeholder="Введите новый пароль">
         <label for="password" class="brutalist-label">Пароль</label>
     </div>
     <div class="brutalist-container">
-        <input type="password" id="repassword" name="password"  class="brutalist-input smooth-type"placeholder="Повторите пароль">
+        <input type="password" id="repassword" name="password" class="brutalist-input smooth-type"
+            placeholder="Повторите пароль">
         <label for="repassword" class="brutalist-label">Повтор пароля</label>
     </div>
     <div class="brutalist-container">
         <label for="agree" class="brutalist-label">Я дважды проверил</label>
         <div class="checkbox-wrapper-10">
-            <input  type="checkbox" id="cb5" class="tgl tgl-flip">
+            <input type="checkbox" id="cb5" class="tgl tgl-flip">
             <label for="cb5" data-tg-on="Да" data-tg-off="Нет" class="tgl-btn"></label>
-          </div>
-          <br>
+        </div>
+        <br>
     </div>
 
     <label for="theme" class="theme">
@@ -46,7 +47,7 @@
         </span>
     </label>
     <div class="form-group">
-        <button type="button" id = "save">Сохранить</button>
+        <button type="button" id="save">Сохранить</button>
     </div>
 </form>
 

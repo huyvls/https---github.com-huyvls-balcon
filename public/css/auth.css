@@ -1,55 +1,60 @@
-
-
-  .auth-form {
+.auth-form {
     background: rgba(255, 255, 255, 0);
-      position: absolute;
-      top: 30%; 
-      left: 50%;
-      transform: translate(-50%, -50%);
-      
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-  }
-  .form-wrapper {
-          position: relative; 
-          width: 100%; 
-          height: 100vh; 
-      }
-  .auth-form h2 {
-      margin: 0 0 20px;
-      text-align: center;
-  }
-  .auth-form label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-  }
- 
-  .auth-form button {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 30px;
-  }
-  .auth-form button:hover {
-      background-color: #0056b3;
-  }
-  .auth-form .register-link {
-      text-align: center;
-      margin-top: 20px;
-  }
-  .auth-form .register-link a {
-      color: #007bff;
-      text-decoration: none;
-  }
-  .auth-form .register-link a:hover {
-      text-decoration: underline;
-  }
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.auth-form h2 {
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.auth-form button:hover {
+    background-color: #0056b3;
+}
+
+.auth-form .register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-form .register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.auth-form .register-link a:hover {
+    text-decoration: underline;
+}

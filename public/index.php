@@ -1,7 +1,7 @@
 <?php
 
-use Phalcon\Mvc\Application, 
-Phalcon\Autoload\Loader;
+use Phalcon\Mvc\Application,
+    Phalcon\Autoload\Loader;
 use App\Components\DiContainer;
 
 
@@ -18,7 +18,8 @@ $loader->setNamespaces([
     'App\Controllers' =>  APP_PATH . '/app/controllers/',
     'App\Models'      => APP_PATH . '/app/models/',
     'App\Components'  => APP_PATH . '/app/components/',
-    'App\Services'    => APP_PATH . '/app/services/'
+    'App\Services'    => APP_PATH . '/app/services/',
+    'App\Repositories' => APP_PATH . '/app/repositories/'
 ]);
 
 $loader->register();

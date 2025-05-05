@@ -1,40 +1,35 @@
-<?php      
-namespace App\Controllers;
-use App\Components\Profile\ProfileRequestDto,
-App\Components\Profile\ProfileValidator,
-App\Components\Profile\ProfileEditor;
-use Phalcon\Http\ResponseInterface;
+<?php
 
+namespace App\Controllers;
+
+use Phalcon\Http\ResponseInterface;
+use App\Components\Profile\ProfileRequestDto,
+    App\Components\Profile\ProfileValidator,
+    App\Components\Profile\ProfileEditor;
 
 
 class ProfileController extends BaseController
 {
-    public array $user = [];
 
-    public function onConstruct()
+    public function indexAction(): void
     {
-    $this->user = $this->session->get("user") ?? [];
+
+        $this->view->setVars([
+            'email' => $this->user['email'],
+            'login' => $this->user['username'],
+            'title' => 'Настройки'
+        ]);
+        $this->view->pick("balcon/profile");
+        $this->view->setTemplateAfter('main');
     }
-    public function indexAction(): void  {
-    $email = $this->user['email'];
-    $login = $this->user['username'];
-    
-
-    $this-> view->setVars ([
-        'email' => $email,
-        'login' => $login,
-        'title' => 'Настройки'
-    ]);
-    $this->view->pick("balcon/profile");
-    $this->view->setTemplateAfter('main');
-}
 
 
-    public function getThemeRequestAction(): ResponseInterface{
+    public function getThemeRequestAction(): ResponseInterface
+    {
 
-        if ($this->request->isAjax()) {                             
+        if ($this->request->isAjax()) {
             $usetting = $this->session->get('user_settings');
-            $theme = $usetting['theme'];                                
+            $theme = $usetting['theme'];
             return $this->response->setJsonContent(['theme' => $theme]);
         }
         return $this->response
@@ -42,35 +37,36 @@ class ProfileController extends BaseController
             ->setJsonContent(['error' => true, 'message' => 'Invalid request']);
     }
 
-    public function swapThemeRequestAction(): ResponseInterface{
-        if ($this->request->isPost()){
-            $rawBody = $this->request->getJsonRawBody();
-            $theme = $rawBody->theme ?? null; 
+    public function swapThemeRequestAction(): ?ResponseInterface
+    {
 
-            if ($theme){
-                $this->UserSettingsService->updateTheme($theme);
-                
-                return $this->response->setJsonContent(['theme' => $theme]);
-            }
+        $rawBody = $this->request->getJsonRawBody();
+        $theme = $rawBody->theme ?? null;
+
+        if ($theme) {
+            $this->UserSettingsService->updateTheme($theme);
+
+            return $this->response->setJsonContent(['theme' => $theme]);
         }
+        return null;
     }
 
 
-    public function editRequestAction(): ResponseInterface{
-        
-        if ($this->request->isPost()) {
-        
-        $data =  $this->request->getJsonRawBody();
-        
-        $dto = ProfileRequestDto::fromJson($data); 
-           
-        $ProfileEditor = $this->di->get('ProfileEditor');
-                
-        $result = $ProfileEditor->edit($dto, $this->user['id']);
-        
-        return $this->response->setJsonContent($result);
+    public function editRequestAction(): ?ResponseInterface
+    {
 
+        if ($this->request->isPost()) {
+
+            $data =  $this->request->getJsonRawBody();
+
+            $dto = ProfileRequestDto::fromJson($data);
+
+            $ProfileEditor = $this->di->get('ProfileEditor');
+
+            $result = $ProfileEditor->edit($dto, $this->user['id']);
+
+            return $this->response->setJsonContent($result);
         }
-    
+        return null;
     }
 }

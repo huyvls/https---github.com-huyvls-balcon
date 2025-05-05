@@ -1,8 +1,8 @@
-<?php 
+<?php
+
 namespace App\Services;
 
-class Logger{
-    public function write():void {
-        
-    }
+class Logger
+{
+    public function write(): void {}
 }

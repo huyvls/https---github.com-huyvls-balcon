@@ -2,96 +2,43 @@
 namespace App\Controllers;
 
 use Phalcon\Mvc\Controller;
-use App\Models\Users;
+use Phalcon\Http\ResponseInterface;
 use App\Models\UserSettings;
 use App\Controllers\BaseController;
+use App\Components\Auth\AuthRequestDto;
+use App\Repositories\UserRepository;
+use App\Services\UserSettingsService;
 
 
 class AuthController extends BaseController 
 {
-    public function indexAction()
-    {
+    public function indexAction():?ResponseInterface{
 
-        $this ->view->setVar("reg", false);
-        //$this->view ->setVar("need", 0);
+        $this-> view->setVar("title","Авторизация");
+        $this->view->pick("balcon/auth");
+        $this->view->setTemplateAfter('main');
+        
         if ($this->request->isPost()) {
-        $data = $this->request->getJsonRawBody();
-        $login = $data->username ?? null;
-        $password = $data->password ?? null;
+        $authDto = AuthRequestDto::fromJson($this->request->getJsonRawBody());
 
+        $user = UserRepository::autorisation($authDto);
 
-        $checkauth = Users::findFirst([
-            'conditions' => 'user_name = :login: OR email = :login: AND password = :password:',
-            'bind' => [
-                'login' => $login,
-                'password' => $password,
-            ]
-        ]);
-
-        if ($checkauth) {
-            $this->session->set ('user', [
-                'id'=> $checkauth->user_id,
-                'username'=> $checkauth->user_name, 
-                'email'=> $checkauth->email
-                
-            ]);
-
-            $usetting = UserSettings::findFirst([
-                'conditions' => 'user_id = :user_id:',
-                'bind'       => [
-                    'user_id' => $checkauth->user_id,
-                ]
-            ]);
-
-            if($usetting){
-            $this->session->set ('user_settings', [
-                'theme'=> $usetting->theme,
-                'text_color'=> $usetting->text_color, 
-            ]);
-           }
-
-           
-            $user = $this->session->get('user');
-            if ($user) {
-                $username = $user['username'];
-                $this ->view->setVar("username", $username);
-
+        if ($user) {
+            $userService = $this->di->get('UserSettingsService');
+            $userService->setSessionDataByUser($user);
 
             return  $this->response->setJsonContent([
-                'theme' => $usetting->theme,
                 'success' => true,
-                'message' => 'Добро пожаловать,' . $username]);
+                'message' => 'Добро пожаловать,' . $user->user_name]);
 
-            }
-                
         }
         else{
-            $this ->view->setVar("username", "Гость");
             return $this->response->setJsonContent([
                 'success' => false,
                 'message' => 'Неправильно, попробуй еще раз']);
-              
         }
-        
     }
-    
-    $this ->view->setVar("username", "путник");
+    return null;
+}
 
-        $user_id = 2 ;
-        $users = Users::findfirst($user_id);
-        
-        
-
-
-    $registered = $this->session->get('reg');
-    if ($registered) {
-    $check = $registered['Y'];
-    $this ->view->setVar("reg", $check);
-    }
-
-    $this-> view->setVar("title","Авторизация");
-    $this->view->pick("balcon/auth");
-    $this->view->setTemplateAfter('main');  
-   
-    }
 }

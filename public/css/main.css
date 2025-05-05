@@ -19,10 +19,10 @@ body {
 }
 
 .dark-theme {
-    background-image: url('/img/black_back.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-image: url('/img/black_back.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
@@ -60,7 +60,7 @@ nav a:hover {
     color: rgb(151, 43, 155);
 }
 
-.dark-theme nav a:hover{
+.dark-theme nav a:hover {
     color: rgb(234, 161, 236);
 }
 
@@ -96,7 +96,7 @@ footer {
 
 
 .rectangle {
-    position: fixed; 
+    position: fixed;
     top: 50px;
     right: 20px;
     width: 400px;
@@ -111,9 +111,9 @@ footer {
     border-radius: 8px;
     opacity: 1;
     transition: opacity 1s ease-out;
-  }
-  
-  /* Класс для исчезания */
-  .fade-out {
+}
+
+/* Класс для исчезания */
+.fade-out {
     opacity: 0;
-  }
+}
