@@ -3,13 +3,14 @@
 namespace App\Components\Profile;
 
 use App\Models\Users;
+use App\Components\Profile\ProfileRequestDto;
 
 class ProfileValidator
 {
     public function validate(ProfileRequestDto $dto): array
     {
 
-        $errors = [];
+        array $errors;
         $reusername = null;
         if ($dto->username) {
             $reusername = Users::findFirst([

@@ -5,7 +5,8 @@ namespace App\Repositories;
 use App\Models\Users;
 use App\Models\UserSettings;
 use App\Components\Auth\AuthRequestDto;
-
+use App\Components\Register\RegisterValidator;
+use DateTime;
 
 class UserRepository
 {
@@ -17,19 +18,48 @@ class UserRepository
         ]);
     }
 
-    public static function findUserSettings(int $userId): ?UserSettings
+    public function findByUsername(string $username): ?Users
     {
-        return UserSettings::findFirst([
-            'conditions' => 'user_id = :user_id:',
-            'bind' => ['user_id' => $userId],
+        return Users::findFirst([
+            'conditions' => 'user_name = :login:',
+            'bind' => ['login' => $username]
         ]);
     }
 
-    public static function getAllUsers(): Users
+    public function findByEmail(string $email): ?Users
     {
-        return UserSettings::findFirst([
-            'conditions' => 'user_id = :user_id:',
-            'bind' => ['user_id' => $userId],
+        return Users::findFirst([
+            'conditions' => 'email = :email:',
+            'bind' => ['email' => $email]
         ]);
+    }
+
+    public static function createUser(RegisterValidator $validator): UserSettings
+    {
+        Users::create([
+            'user_name'  => $validator->username,
+            'email' => $validator->email,
+            'password' => $validator->password,
+            'registration_date' => date('Y-m-d')
+
+        ]);
+        return new UserSettings;
+    }
+
+    public static function create(object $data): Users
+    {
+        $user = new Users;
+        $user->assign(
+            [
+                'email' => $data->email,
+                'user_name' => $data->username,
+                'password' => $data->password
+            ]
+        );
+        if ($user->save()) {
+            return $user;
+        } else {
+            throw new \Exception("Не удалось создать пользователя");
+        }
     }
 }

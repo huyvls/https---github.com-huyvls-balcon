@@ -25,7 +25,7 @@
                 placeholder="Введите Ваш email" required>
             <label for="email" class="brutalist-label">Email</label>
         </div>
-        <button type="button" id="accept">Войти</button>
+        <button type="button" id="accept">Зарегистрироваться</button>
 
         <div class="register-link">
             <p>Если у Вас не нет аккаунта, Вы можете <a href="/">войти</a></p>
