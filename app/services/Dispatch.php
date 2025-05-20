@@ -21,9 +21,7 @@ class Dispatch
 
             $di = $dispatcher->getDI();
 
-
-            $session = $di->get('session');
-            $user = $session->get('user');
+            $user = $di->get('session')->get('user');
 
             $controller = $dispatcher->getControllerName();
             $action = $dispatcher->getActionName();

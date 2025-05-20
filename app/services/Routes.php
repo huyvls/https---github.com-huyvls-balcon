@@ -6,6 +6,8 @@ use Phalcon\Mvc\Router;
 
 class Routes
 {
+
+    //TODO убрать все роуты в базу и распаковывать форычем мб 
     static function init(): Router
     {
         $router = new Router();
@@ -62,6 +64,15 @@ class Routes
                 'namespace'  => 'App\Controllers',
                 'controller' => 'Profile',
                 'action' => 'editRequest'
+            ]
+        )->via(['GET', 'POST']);
+        //Чаты
+        $router->add(
+            '/chat',
+            [
+                'namespace'  => 'App\Controllers',
+                'controller' => 'Chat',
+                'action' => 'index'
             ]
         )->via(['GET', 'POST']);
 

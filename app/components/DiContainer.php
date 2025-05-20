@@ -59,7 +59,7 @@ class DiContainer
             return $volt;
         });
 
-        $di->set('view', function () {
+        $di->set('view', function (): View {
             $view = new View();
             $view->setViewsDir(APP_PATH . '/app/views/');
             $view->registerEngines([
