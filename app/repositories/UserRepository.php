@@ -10,11 +10,11 @@ use DateTime;
 
 class UserRepository
 {
-    public static function autorisation(AuthRequestDto $data): ?Users
+    public static function autorisation(AuthRequestDto $dto): ?Users
     {
         return Users::findFirst([
             'conditions' => '(user_name = :login: OR email = :login:) AND password = :password:',
-            'bind' => ['login' => $data->login, 'password' => $data->password]
+            'bind' => ['login' => $dto->login, 'password' => $dto->password]
         ]);
     }
 

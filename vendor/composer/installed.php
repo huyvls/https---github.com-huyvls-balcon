@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5330f64840706ca2d1adb76356a6656451adc761',
+        'reference' => '6645afe198a9e6e14a2bd1ba7a777eb29e248471',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5330f64840706ca2d1adb76356a6656451adc761',
+            'reference' => '6645afe198a9e6e14a2bd1ba7a777eb29e248471',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -45,6 +45,15 @@
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'phalcon/ide-stubs' => array(
+            'pretty_version' => 'v5.9.3',
+            'version' => '5.9.3.0',
+            'reference' => '279475ec34dd07cda7e95cdbb944f3d3df035fb4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phalcon/ide-stubs',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'psr/http-factory' => array(
             'pretty_version' => '1.1.0',

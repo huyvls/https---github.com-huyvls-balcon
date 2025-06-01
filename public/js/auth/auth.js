@@ -10,8 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function handleLogin() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
-    
-    
+
     if (!usernameInput || !passwordInput) {
         showError('Форма не найдена');
         return;
@@ -26,7 +25,7 @@ async function handleLogin() {
     }
 
     try {
-        const response = await fetch('/', {
+        const response =  await fetch('/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,14 +37,16 @@ async function handleLogin() {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error('HTTP error! status: ' + response.status);
         }
 
-        const data = await response.json();
+        const data =  await response.json();
 
-        if (data?.success === false) {
+        if (data.success === false) {
             showError(data.message || 'Неверные учетные данные');
         } else {
+            console.log("nubla");
+            console.log(data.theme);
             handleSuccess(data);
         }
     } catch (error) {
@@ -55,21 +56,23 @@ async function handleLogin() {
 }
 
 function showError(message) {
+
+    console.log('Attempting to show error:', message);
     let errorBox = document.getElementById('error-box');
-    
-    
+
+
     if (!errorBox) {
         errorBox = document.createElement('div');
         errorBox.id = 'error-box';
-        errorBox.className = 'error-box';
+        errorBox.className = 'rectangle';
         document.body.appendChild(errorBox);
     }
-    
-    
+
+
     errorBox.textContent = message;
     errorBox.classList.remove('fade-out');
-    
-    
+
+
     setTimeout(() => {
         errorBox.classList.add('fade-out');
     }, 3000);
@@ -79,7 +82,6 @@ function handleSuccess(data) {
     if (data.theme) {
         localStorage.setItem('theme', data.theme);
         console.log('Тема установлена:', data.theme);
-        // Здесь можно добавить перенаправление или другие действия при успехе
-        // window.location.href = '/dashboard';
+        window.location.href = '/chat';
     }
 }

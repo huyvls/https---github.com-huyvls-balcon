@@ -8,7 +8,7 @@
 {% endif %}
 #}
 <div class="form-wrapper">
-  <form class="auth-form" action="/" method="POST">
+  <form class="auth-form" action="/auth" method="POST">
     <h2>Гавно💅</h2>
     <div class="brutalist-container">
       <input id="username" name="username" placeholder="Или почту" class="brutalist-input smooth-type" type="text"
@@ -33,4 +33,4 @@
 {{ content() }}
 
 
-<script src="/js/auth.js"></script>
+<script type="module" src="/js/auth/Main.js"></script>

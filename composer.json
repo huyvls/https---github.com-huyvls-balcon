@@ -1,5 +1,8 @@
 {
     "require": {
         "cboden/ratchet": "^0.4.4"
+    },
+    "require-dev": {
+        "phalcon/ide-stubs": "^5.9"
     }
 }

@@ -26,7 +26,6 @@ document.getElementById('accept').addEventListener('click', () => {
 
         .then(response => response.json())
         .then(data => {
-            console.log('Ответ сервера:', data);
 
             if (data && data.success === false) {
 

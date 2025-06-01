@@ -28,7 +28,9 @@ class Dispatch
 
             $publicRoutes = [
                 'Register::index',
-                'Auth::index'
+                'Register::register',
+                'Auth::index',
+                'Auth::auth'
             ];
 
             if (!$user && !in_array("$controller::$action", $publicRoutes)) {

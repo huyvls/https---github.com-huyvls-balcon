@@ -12,7 +12,7 @@ class Routes
     {
         $router = new Router();
 
-        //Главнгая стр(авторизации)
+        //Главнгая стр
         $router->add(
             '/',
             [
@@ -21,6 +21,15 @@ class Routes
                 'action' => 'index'
             ]
         );
+        //Авторищзация
+        $router->add(
+            '/auth',
+            [
+                'namespace'  => 'App\Controllers',
+                'controller' => 'Auth',
+                'action' => 'auth'
+            ]
+        )->via(['POST']);;
         //Стр регистрации
         $router->add(
             '/register',
