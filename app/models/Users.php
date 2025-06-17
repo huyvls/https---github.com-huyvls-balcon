@@ -6,15 +6,15 @@ use Phalcon\Mvc\Model;
 
 class Users extends Model
 {
-    public $user_id;
+    public int $user_id;
 
-    public $user_name;
+    public  string $user_name;
 
-    public $email;
+    public string $email;
 
-    public $password;
+    public string $password;
 
-    public $registration_date;
+    public string $registration_date;
 
     private function initialize()
     {

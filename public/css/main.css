@@ -113,7 +113,6 @@ footer {
     transition: opacity 1s ease-out;
 }
 
-/* Класс для исчезания */
 .fade-out {
     opacity: 0;
 }

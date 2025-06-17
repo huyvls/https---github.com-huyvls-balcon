@@ -3,10 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Users;
-use App\Models\UserSettings;
 use App\Components\Auth\AuthRequestDto;
-use App\Components\Register\RegisterValidator;
-use DateTime;
+
 
 class UserRepository
 {
@@ -34,17 +32,42 @@ class UserRepository
         ]);
     }
 
-    public static function createUser(RegisterValidator $validator): UserSettings
+    public function CheckExistUser(int $user_id): bool
     {
-        Users::create([
-            'user_name'  => $validator->username,
-            'email' => $validator->email,
-            'password' => $validator->password,
-            'registration_date' => date('Y-m-d')
-
+        $user =  Users::findFirst([
+            'conditions' => 'user_id = :user_id:',
+            'bind' => ['user_id' => $user_id]
         ]);
-        return new UserSettings;
+
+        if (!$user) {
+            return false;
+        }
+
+        return true;
     }
+
+    public function getIdbyUsername(string $username): ?int
+    {
+        $user =  Users::findFirst([
+            'conditions' => 'user_name = :login:',
+            'bind' => ['login' => $username]
+        ]);
+
+        return $user->user_id;
+    }
+
+
+    // public static function createUser(RegisterValidator $validator): UserSettings
+    // {
+    //     Users::create([
+    //         'user_name'  => $validator->username,
+    //         'email' => $validator->email,
+    //         'password' => $validator->password,
+    //         'registration_date' => date('Y-m-d')
+
+    //     ]);
+    //     return new UserSettings;
+    // }
 
     public static function create(object $data): Users
     {

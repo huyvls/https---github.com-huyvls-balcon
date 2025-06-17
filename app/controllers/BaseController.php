@@ -12,4 +12,9 @@ class BaseController extends Controller
     {
         $this->user = $this->session->get('user') ?? [];
     }
+
+    protected function getUserId(): int
+    {
+        return $this->user['id'];
+    }
 }

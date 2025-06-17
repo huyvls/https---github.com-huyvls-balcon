@@ -32,10 +32,6 @@ class AuthController extends BaseController
                 $userService = $this->di->get('UserSettingsService');
                 $userService->setSessionDataByUser($user);
 
-                $TEMA = $this->session->get('user_settings')['theme'];
-
-                file_put_contents('C:/zxc/workk.txt', $TEMA . "\n", FILE_APPEND);
-
                 return  $this->response->setJsonContent([
                     'success' => true,
                     'message' => 'Добро пожаловать,' . $user->user_name,
@@ -48,10 +44,9 @@ class AuthController extends BaseController
                 ]);
             }
         } catch (Throwable $e) {
-            file_put_contents('C:/zxc/workk.txt', $e->getMessage(), FILE_APPEND);
             return $this->response->setStatusCode(500, 'server error')->setJsonContent([
                 'success' => false,
-                'message' => 'ошибка сервера'
+                'message' => $e->getMessage()
             ]);
         }
         return null;

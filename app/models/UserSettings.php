@@ -6,13 +6,13 @@ use Phalcon\Mvc\Model;
 
 class UserSettings extends Model
 {
-    public $id;
+    public int $id;
 
-    public $user_id;
+    public int $user_id;
 
-    public $theme;
+    public string $theme;
 
-    public $text_color;
+    public string $text_color;
 
     public function initialize()
     {

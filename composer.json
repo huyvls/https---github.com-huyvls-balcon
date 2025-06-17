@@ -1,6 +1,8 @@
 {
     "require": {
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "phalcon/migrations": "^3.0",
+        "phalcon/devtools": "^2.0"
     },
     "require-dev": {
         "phalcon/ide-stubs": "^5.9"

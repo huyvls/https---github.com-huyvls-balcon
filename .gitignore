@@ -2,4 +2,5 @@
 cache/
 config/
 sessions/
+vendor/
 *.txt

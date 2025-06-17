@@ -1,62 +1,73 @@
-document.getElementById('accept').addEventListener('click', () => {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const repasswordInput = document.getElementById('repassword');
-    const emailInput = document.getElementById('email');
-    const namevalue = usernameInput.value;
-    const passvalue = passwordInput.value;
-    const repassvalue = repasswordInput.value;
-    const emailvalue = emailInput.value;
-
-    console.log('Введённый логин:', namevalue, 'Введенный пароль: ', passvalue);
-
-
-    fetch('/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            username: namevalue,
-            password: passvalue,
-            repassword: repassvalue,
-            email: emailvalue
-        })
-    })
-
-        .then(response => response.json())
-        .then(data => {
-
-            if (data && data.success === false) {
-
-                let rectangle = document.getElementById('rectangle');
-
-
-                if (!rectangle) {
-
-                    rectangle = document.createElement('div');
-                    rectangle.id = 'rectangle';
-                    rectangle.className = 'rectangle';
-                    rectangle.textContent = data.message;
-                    document.body.appendChild(rectangle);
-                }
-
-                if (rectangle) {
-                    setTimeout(() => {
-                        rectangle.classList.add('fade-out');
-                    }, 3000);
-                }
-
-                rectangle.classList.remove('fade-out');
-            }
-            else if (data && data.success === true) {
-                window.location.href = '/';
-            }
-
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
+class RegistrationForm {
+    constructor() {
+      this.formElements = {
+        username: document.getElementById('username'),
+        password: document.getElementById('password'),
+        repassword: document.getElementById('repassword'),
+        email: document.getElementById('email'),
+        acceptButton: document.getElementById('accept')
+      };
+  
+      this.notification = null;
+      this.initEventListeners();
+    }
+  
+    initEventListeners() {
+      this.formElements.acceptButton?.addEventListener('click', () => this.handleRegistration());
+    }
+  
+    async handleRegistration() {
+      const { username, password, repassword, email } = this.formElements;
+      const userData = {
+        username: username.value,
+        password: password.value,
+        repassword: repassword.value,
+        email: email.value
+      };
+  
+      console.log('Введённый логин:', userData.username, 'Введенный пароль:', userData.password);
+  
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
         });
-});
-
-
+  
+        const data = await response.json();
+        this.handleResponse(data);
+      } catch (error) {
+        console.error('Ошибка:', error);
+        this.showNotification('Произошла ошибка при регистрации');
+      }
+    }
+  
+    handleResponse(data) {
+      if (data?.success === false) {
+        this.showNotification(data.message, 3000);
+      } else if (data?.success === true) {
+        window.location.href = '/';
+      }
+    }
+  
+    showNotification(message, duration = 3000) {
+      if (!this.notification) {
+        this.notification = document.createElement('div');
+        this.notification.id = 'rectangle';
+        this.notification.className = 'rectangle';
+        document.body.appendChild(this.notification);
+      }
+  
+      this.notification.textContent = message;
+      this.notification.classList.remove('fade-out');
+  
+      setTimeout(() => {
+        this.notification?.classList.add('fade-out');
+      }, duration);
+    }
+  }
+  
+  // Инициализация при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    new RegistrationForm();
+  });

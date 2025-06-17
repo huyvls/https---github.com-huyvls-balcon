@@ -1,5 +1,5 @@
 import { AuthView } from "/js/auth/AuthView.js";
-import { ErrorHandler } from "/js/auth/ErrorHandler.js";
+import { ErrorHandler } from "/js/ErrorHandler.js";
 import { AuthService } from "/js/auth/AuthService.js";
 
 export class AuthController {
