@@ -8,8 +8,9 @@ export class ChatList {
         this.container.innerHTML = '';
         this.chats.forEach((chat, index) => {
             const chatEl = document.createElement('div');
-            console.log(chat.name);
             chatEl.className = 'chat-item';
+            chatEl.dataset.chatId = chat.Chat_connections.chat_id;
+
             chatEl.innerHTML = `
             <span>${chat.name}</span>
             <button class="delete-button js-delete-button" data-index="${index}">✖</button>

@@ -27,7 +27,7 @@ export class AuthController {
             if (data.success === false) {
                 this.errorHandler.show(data.message || 'Неверные учетные данные');
             } else {
-                this.view.redirectToChat(data.theme);
+                this.view.redirectToChat(data.theme, data.userId);
             }
         } catch (error) {
             this.errorHandler.show('Ошибка при подключении к серверу');

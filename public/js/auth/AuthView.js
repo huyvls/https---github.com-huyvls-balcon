@@ -16,9 +16,10 @@ export class AuthView {
         this.acceptButton.addEventListener('click', handler);
     }
 
-    redirectToChat(theme){
-        if(theme){
+    redirectToChat(theme, userId){
+        if(userId){
             localStorage.setItem('theme', theme);
+            localStorage.setItem('userId', userId);
             window.location.href = '/chat';
         }
     }

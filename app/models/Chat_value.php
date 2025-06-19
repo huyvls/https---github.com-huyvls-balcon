@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -10,7 +10,7 @@ class Chat_value extends Model
 
     public  int $chat_id;
 
-    public int $user_id;
+    public int $sender_user_id;
 
     public string $message;
 
@@ -20,8 +20,4 @@ class Chat_value extends Model
     {
         $this->setSource("chat_value");
     }
-
-
-
-    
 }

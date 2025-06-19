@@ -26,7 +26,7 @@ class AuthController extends BaseController
         try {
             $authDto = AuthRequestDto::fromJson($this->request->getJsonRawBody());
 
-            $user = UserRepository::autorisation(dto: $authDto);
+            $user = UserRepository::autorisation( $authDto);
 
             if ($user) {
                 $userService = $this->di->get('UserSettingsService');
@@ -35,7 +35,8 @@ class AuthController extends BaseController
                 return  $this->response->setJsonContent([
                     'success' => true,
                     'message' => 'Добро пожаловать,' . $user->user_name,
-                    'theme'   =>  $this->session->get('user_settings')['theme']
+                    'theme'   =>  $this->session->get('user_settings')['theme'],
+                    'userId'  => $user->user_id
                 ]);
             } else {
                 return $this->response->setJsonContent([

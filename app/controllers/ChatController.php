@@ -5,12 +5,22 @@ namespace App\Controllers;
 use App\Repositories\Chat_connectionsRepository;
 use App\Repositories\Chat_valueRepository;
 use App\Repositories\UserRepository;
+use App\Components\WsServerComponent;
 
 
 class ChatController extends BaseController
 {
     public function indexAction()
     {
+
+        $wsComponent = new WsServerComponent;
+
+        $isRuning = $wsComponent->WBSisRuning('Windows');
+
+        if(!$isRuning){
+            $wsComponent->startWBS('Windows');
+        }
+
 
         $this->view->setVar("title", 'Чаты');
         $this->view->pick("balcon/chats");
@@ -45,9 +55,23 @@ class ChatController extends BaseController
     {
         $chatModel = new Chat_valueRepository();
 
-        $chat_id = $this->request->getJsonRawBody(); //объект
+        $chat_id = $this->request->getJsonRawBody(); 
 
-        $chatModel->getMessages($chat_id); // todo переписать 
+        $messages = $chatModel->getMessages($chat_id->chatId); 
+        
+
+        $result = [];
+
+        foreach ($messages as $message) {
+            $result[] = [
+                'id' => $message->id,
+                'text' => $message->message,
+                'sender' => $message->sender_user_id,
+                'time' => $message->sent_at
+            ];
+        }
+        
+        return $this->response->setJsonContent($result);
     }
 
     public function createRequestAction()
@@ -72,8 +96,6 @@ class ChatController extends BaseController
         $chatModel = new Chat_connectionsRepository();
 
         $result = $chatModel->deleteChat($request->chat_id);
-
-        file_put_contents('C:/zxc/workk.txt', json_encode($request)."\n", FILE_APPEND);
 
         return $this->response->setJsonContent(['message'=>$result]);
     }

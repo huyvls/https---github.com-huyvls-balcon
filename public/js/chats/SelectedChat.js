@@ -2,6 +2,12 @@ export class SelectedChat {
     constructor() {
         this.initElements();
         this.bindEvents();
+        this.socket = null;
+        this.currentChatId = null;
+
+        window.addEventListener('beforeunload', () => {
+            if (this.socket) this.socket.close();
+        });
     }
 
     initElements() {
@@ -29,35 +35,44 @@ export class SelectedChat {
     }
 
     selectChat(chatElement) {
-        const chatId = chatElement.getAttribute('data-chat-id');
-        const chatName = chatElement.textContent;
+        const chatId = chatElement.dataset.chatId;
 
+        const chatName = chatElement.textContent;
 
         this.elements.chatWindow.style.display = 'flex';
         this.elements.chatTitle.textContent = chatName;
 
-
         this.loadChatHistory(chatId);
+
+        this.connectToWebSocket(chatId);
     }
 
-    loadChatHistory(chatId) {
+    async loadChatHistory(chatId) {
         this.elements.messageHistory.innerHTML = '';
 
-        // Временные данные (заменить на реальный API-запрос)
-        const mockMessages = [
-            { text: 'Привет! Как дела?', sender: 'incoming', time: '12:30' },
-            { text: 'Привет! Все отлично, спасибо!', sender: 'outgoing', time: '12:32' },
-            { text: 'Что нового?', sender: 'incoming', time: '12:33' }
-        ];
+        const response = await fetch('/openChat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ chatId })
+        });
 
-        mockMessages.forEach(msg => {
+        const result = await response.json();
+
+        result.forEach(msg => {
             this.addMessageToHistory(msg.text, msg.sender, msg.time);
         });
     }
 
     addMessageToHistory(text, sender, time = null) {
         const messageElement = document.createElement('div');
-        messageElement.className = `message message-${sender}`;
+
+        const isCurrentUser = sender === Number(localStorage.getItem('userId'));
+
+        const senderClass = isCurrentUser ? 'outgoing' : `incoming`;
+
+        messageElement.className = `message message-${senderClass}`;
 
         if (!time) {
             time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -76,12 +91,11 @@ export class SelectedChat {
         const text = this.elements.messageInput.value.trim();
 
         if (text) {
-            // Добавляем сообщение в историю (оптимистичное обновление)
-            this.addMessageToHistory(text, 'outgoing');
+            
             this.elements.messageInput.value = '';
 
-            // Здесь будет отправка на сервер
-            // this.sendMessageToServer(text);
+           
+             this.sendMessageToServer(text);
         }
     }
 
@@ -89,5 +103,45 @@ export class SelectedChat {
         this.elements.messageHistory.scrollTop = this.elements.messageHistory.scrollHeight;
     }
 
+    connectToWebSocket(chatId) {
+        if (this.socket) {
+            this.socket.close();
+        }
 
+        this.socket = new WebSocket(`ws://localhost:8080?chatId=${chatId}`);
+        this.currentChatId = chatId;
+
+        this.socket.onopen = () => {
+           // console.log(`WebSocket подключён к чату ${chatId}`);
+        };
+
+        this.socket.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            this.addMessageToHistory(data.text, data.sender, data.time);
+        };
+
+        this.socket.onerror = (err) => {
+            console.error('WebSocket ошибка:', err);
+        };
+
+        this.socket.onclose = () => {
+         //   console.log(` WebSocket отключён от чата ${chatId}`);
+        };
+    }
+
+    sendMessageToServer(text) {
+        if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+            console.warn('WebSocket не подключён');
+            return;
+        }
+    
+        const message = {
+            text: text,
+            sender: Number(localStorage.getItem('userId')),
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            chatId: this.currentChatId
+        };
+    
+        this.socket.send(JSON.stringify(message));
+    }
 }

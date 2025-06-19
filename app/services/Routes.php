@@ -120,6 +120,15 @@ class Routes
                 'action' => 'deleteRequest'
             ]
         )->via(['POST']);
+        //Получение сообщений
+        $router->add(
+            '/openChat',
+            [
+                'namespace'  => 'App\Controllers',
+                'controller' => 'Chat',
+                'action' => 'openChatRequest'
+            ]
+        )->via(['POST']);
 
 
         return $router;

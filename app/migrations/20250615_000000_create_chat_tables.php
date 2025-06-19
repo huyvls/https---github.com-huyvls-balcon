@@ -45,7 +45,7 @@ class CreateChatTables extends \Phalcon\Mvc\Model\Migration
                     'type' => Column::TYPE_INTEGER,
                     'notNull' => true
                 ]),
-                new Column('user_id', [
+                new Column('sender_user_id', [
                     'type' => Column::TYPE_INTEGER,
                     'notNull' => true
                 ]),

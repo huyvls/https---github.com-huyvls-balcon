@@ -8,7 +8,6 @@ export class AuthService {
                 password
             })
         });
-        console.log(username, password);
         if (!response.ok){
             console.log('HTTP status:'  + response.status);
         }
