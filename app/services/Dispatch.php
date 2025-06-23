@@ -30,7 +30,9 @@ class Dispatch
                 'Register::index',
                 'Register::register',
                 'Auth::index',
-                'Auth::auth'
+                'Auth::auth',
+                'Telegram::webhook',
+                'Chat::saveMessages'
             ];
 
             if (!$user && !in_array("$controller::$action", $publicRoutes)) {

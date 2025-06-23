@@ -17,7 +17,7 @@ class ChatController extends BaseController
 
         $isRuning = $wsComponent->WBSisRuning('Windows');
 
-        if(!$isRuning){
+        if (!$isRuning) {
             $wsComponent->startWBS('Windows');
         }
 
@@ -55,10 +55,10 @@ class ChatController extends BaseController
     {
         $chatModel = new Chat_valueRepository();
 
-        $chat_id = $this->request->getJsonRawBody(); 
+        $chat_id = $this->request->getJsonRawBody();
 
-        $messages = $chatModel->getMessages($chat_id->chatId); 
-        
+        $messages = $chatModel->getMessages($chat_id->chatId);
+
 
         $result = [];
 
@@ -70,7 +70,7 @@ class ChatController extends BaseController
                 'time' => $message->sent_at
             ];
         }
-        
+
         return $this->response->setJsonContent($result);
     }
 
@@ -89,7 +89,8 @@ class ChatController extends BaseController
         return $this->response->setJsonContent(['message' => $create]);
     }
 
-    public function deleteRequestAction(){
+    public function deleteRequestAction()
+    {
 
         $request = $this->request->getJsonRawBody();
 
@@ -97,6 +98,19 @@ class ChatController extends BaseController
 
         $result = $chatModel->deleteChat($request->chat_id);
 
-        return $this->response->setJsonContent(['message'=>$result]);
+        return $this->response->setJsonContent(['message' => $result]);
+    }
+
+
+    public function saveMessagesAction()
+    {
+
+        $this->view->disable();
+
+        $request = $this->request->getJsonRawBody();
+
+        $chatModel = new Chat_valueRepository();
+
+        $chatModel->saveMessage($request->chat_id, $request->text, $request->sender_id);
     }
 }

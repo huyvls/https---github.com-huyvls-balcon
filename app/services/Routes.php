@@ -129,7 +129,24 @@ class Routes
                 'action' => 'openChatRequest'
             ]
         )->via(['POST']);
-
+        //Вембхук
+        $router->add(
+            '/telegram/webhook',
+            [
+                'namespace'  => 'App\Controllers',
+                'controller' => 'Telegram',
+                'action' => 'webhook'
+            ]
+        )->via(['POST']);
+        //Сохранение сообщений в базу
+        $router->add(
+            '/saveMessages',
+            [
+                'namespace'  => 'App\Controllers',
+                'controller' => 'Chat',
+                'action' => 'saveMessages'
+            ]
+        )->via(['POST']);
 
         return $router;
     }

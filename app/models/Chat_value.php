@@ -6,7 +6,7 @@ use Phalcon\Mvc\Model;
 
 class Chat_value extends Model
 {
-    public int $id;
+    public ?int $id = null;
 
     public  int $chat_id;
 

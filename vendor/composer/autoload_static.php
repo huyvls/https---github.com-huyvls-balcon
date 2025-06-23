@@ -12,6 +12,7 @@ class ComposerStaticInitce559b9fbd0e097bccee77e6c3cc8be1
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -36,16 +37,23 @@ class ComposerStaticInitce559b9fbd0e097bccee77e6c3cc8be1
         'P' => 
         array (
             'Psr\\Http\\Message\\' => 17,
+            'Psr\\Http\\Client\\' => 16,
             'Phalcon\\Migrations\\' => 19,
             'Phalcon\\Cop\\' => 12,
         ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
         ),
         'E' => 
         array (
             'Evenement\\' => 10,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -103,6 +111,10 @@ class ComposerStaticInitce559b9fbd0e097bccee77e6c3cc8be1
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Psr\\Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
         'Phalcon\\Migrations\\' => 
         array (
             0 => __DIR__ . '/..' . '/phalcon/migrations/src',
@@ -115,9 +127,21 @@ class ComposerStaticInitce559b9fbd0e097bccee77e6c3cc8be1
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
         'Evenement\\' => 
         array (
             0 => __DIR__ . '/..' . '/evenement/evenement/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

@@ -90,12 +90,15 @@ export class SelectedChat {
     sendMessage() {
         const text = this.elements.messageInput.value.trim();
 
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
         if (text) {
-            
+
             this.elements.messageInput.value = '';
 
-           
-             this.sendMessageToServer(text);
+            this.sendMessageToServer(text);
+
+            this.addMessageToHistory(text, Number(localStorage.getItem('userId')), time);
         }
     }
 
@@ -108,11 +111,12 @@ export class SelectedChat {
             this.socket.close();
         }
 
-        this.socket = new WebSocket(`ws://localhost:8080?chatId=${chatId}`);
+        this.socket = new WebSocket(`ws://localhost:8080/?chatId=${chatId}`);
+
         this.currentChatId = chatId;
 
         this.socket.onopen = () => {
-           // console.log(`WebSocket подключён к чату ${chatId}`);
+          //  console.log(`WebSocket подключён к чату ${chatId}`);
         };
 
         this.socket.onmessage = (event) => {
@@ -125,7 +129,7 @@ export class SelectedChat {
         };
 
         this.socket.onclose = () => {
-         //   console.log(` WebSocket отключён от чата ${chatId}`);
+            //   console.log(` WebSocket отключён от чата ${chatId}`);
         };
     }
 
@@ -134,14 +138,14 @@ export class SelectedChat {
             console.warn('WebSocket не подключён');
             return;
         }
-    
+
         const message = {
             text: text,
             sender: Number(localStorage.getItem('userId')),
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             chatId: this.currentChatId
         };
-    
+
         this.socket.send(JSON.stringify(message));
     }
 }
