@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-
 use App\Components\TMessagesHendler;
+use App\Components\TelegramHook;
 
 class TelegramController extends BaseController
 {
@@ -12,18 +12,9 @@ class TelegramController extends BaseController
         $this->view->disable();
 
         $raw = file_get_contents("php://input");
-        $update = json_decode($raw, true);
 
-
-        if (isset($update['message'])) {
-            $chatId = $update['message']['chat']['id'];
-            $text = $update['message']['text'];
-
-            $reply = "Ты написал: $text";
-
-            $bot = new TMessagesHendler();
-            $bot->sendMessage($chatId, "Ты написал: $text");
-        }
+        $handler = new TelegramHook();
+        $handler->handle($raw);
 
         return '';
     }

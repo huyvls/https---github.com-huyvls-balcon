@@ -75,7 +75,7 @@ export class SelectedChat {
         messageElement.className = `message message-${senderClass}`;
 
         if (!time) {
-            time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            time = this.getCurrentDateTime();
         }
 
         messageElement.innerHTML = `
@@ -90,7 +90,7 @@ export class SelectedChat {
     sendMessage() {
         const text = this.elements.messageInput.value.trim();
 
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        const time = this.getCurrentDateTime();
 
         if (text) {
 
@@ -116,7 +116,7 @@ export class SelectedChat {
         this.currentChatId = chatId;
 
         this.socket.onopen = () => {
-          //  console.log(`WebSocket подключён к чату ${chatId}`);
+            //  console.log(`WebSocket подключён к чату ${chatId}`);
         };
 
         this.socket.onmessage = (event) => {
@@ -147,5 +147,18 @@ export class SelectedChat {
         };
 
         this.socket.send(JSON.stringify(message));
+    }
+
+    getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Месяцы от 0 до 11
+        const day = String(now.getDate()).padStart(2, '0');
+    
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 }
